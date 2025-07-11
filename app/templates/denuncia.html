@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👩‍💻home</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</html>
+
+<body>
+    <form method="POST" enctype="multipart/form-data" action="{% url 'enviar_denuncia' %}" class="max-w-xl mx-auto p-6 bg-white rounded shadow-md space-y-6">
+        {% csrf_token %}
+      
+        <!-- Título -->
+        <h2 class="text-2xl font-bold text-gray-800 text-center">Nova Denúncia</h2>
+      
+        <!-- Foto do buraco -->
+        <div>
+          <label class="block mb-2 text-sm font-medium text-gray-700">Foto do buraco</label>
+          <input type="file" name="foto" accept="image/*" required
+                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50">
+        </div>
+      
+        <!-- Nome do denunciante (opcional) -->
+        <div>
+          <label class="block mb-2 text-sm font-medium text-gray-700">Seu nome (opcional)</label>
+          <input type="text" name="nome_denunciante" placeholder="Deixe em branco para anonimato"
+                 class="block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+      
+        <!-- Email -->
+        <div>
+          <label class="block mb-2 text-sm font-medium text-gray-700">E-mail</label>
+          <input type="email" name="email" required
+                 class="block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+      
+        <!-- Telefone -->
+        <div>
+          <label class="block mb-2 text-sm font-medium text-gray-700">Telefone</label>
+          <input type="text" name="telefone" required
+                 class="block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+      
+        <!-- Endereço do problema -->
+        <div>
+          <label class="block mb-2 text-sm font-medium text-gray-700">Endereço do problema</label>
+          <input type="text" name="endereco" placeholder="Rua, número, bairro" required
+                 class="block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+      
+        <!-- Cidade -->
+        <div>
+          <label class="block mb-2 text-sm font-medium text-gray-700">Cidade</label>
+          <select name="cidade" required
+                  class="block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
+            <option value="">Selecione uma cidade</option>
+            {% for cidade in cidades %}
+              <option value="{{ cidade.id }}">{{ cidade.get_nome_display }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      
+        <!-- Botão de envio -->
+        <div class="pt-4">
+          <button type="submit"
+                  class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-200">
+            Enviar denúncia
+          </button>
+        </div>
+      </form>
+      
+
+
+</bory>
