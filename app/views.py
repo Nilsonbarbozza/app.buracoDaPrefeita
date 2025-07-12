@@ -54,6 +54,6 @@ def enviar_denuncia(request):
 def denunciar_existente(request, denuncia_id):
     if request.method == 'POST':
         denuncia = get_object_or_404(Denuncia, id=denuncia_id)
-        denuncia.qtd_denuncias += 1
+        denuncia.contagem_denuncias += 1
         denuncia.save()
     return redirect('home')  # ou outra view que mostra os cards
