@@ -8,38 +8,25 @@
 </html>
 
 <body>
-    <nav class="bg-white border-gray-200 dark:bg-gray-900">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="https://chatgpt.com/backend-api/public_content/enc/eyJpZCI6Im1fNjg3MTY4NzE4ZGY0ODE5MWFhZTJlMjI0M2M0MGM4MTQ6ZmlsZV8wMDAwMDAwMDViOTQ2MWY4OTY5ZjVjYjBjMTk1YjE5YSIsInRzIjoiNDg2NzM5IiwicCI6InB5aSIsInNpZyI6ImExZWU4ZTBiZDQ5YjY3ZGRkN2U3MGRlZDM1NTljMmUwZjU0MDkwY2Q0YTM1NDBmM2YyYjQ0MzU5MzEyYTkzMWMiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsfQ==" class="h-8" alt="Flowbite Logo" />
-            <a href="{% url 'enviar_denuncia' %}">
-				<span class="self-center text-4x1 font-medium whitespace-nowrap dark:text-white">Buraco da Prefeita
-				</span>
-			</a>
-        </a>
-        <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Registrar buraco</button>
-            <button data-collapse-toggle="navbar-cta" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-            </svg>
-        </button>
-        </div>
-        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
-        <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
-            <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-            </li>
-        </ul>
-        </div>
-        </div>
-    </nav>
-	
+	<header>
+		<nav class="bg-gray-900 border-gray-200 dark:bg-gray-900">
+			<div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+				<a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse">
+					<img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
+					<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+				</a>
+				<div class="flex items-center space-x-3 rtl:space-x-reverse">
+					<a href="tel:5541251234" class="text-sm  text-white dark:text-white hover:underline">Contato</a>
+					<a href="{% url 'enviar_denuncia' %}" class="font-bold text-white dark:text-bg-white hover:underline">Denunciar</a>
+				</div>
+			</div>
+		</nav>
+	</header>
+
     <!-- component -->
 <main class="py-6 px-6 flex flex-col gap-6 bg-gray-100 min-h-screen w-full">
 	<!-- CONTENT GOES HERE -->
-	<div class="flex flex-col h-full w-full space-y-6">
+	<div class="flex flex-col mx-auto max-w-screen-xl p-4 space-y-6">
 		<section class="flex flex-col bg-white rounded-lg p-6 shadow-md space-y-6">
 			<div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
 				<div class="col-span-1 flex items-center">
@@ -70,28 +57,25 @@
 
 			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
 				<!-- In use -->
-				{% for denuncia in denuncias %}
-				<div class="flex flex-col px-6 py-2 bg-red-900 shadow rounded-lg overflow-hidden">
+				
+				<div class="flex flex-col px-6 py-2 bg-gray-900 shadow rounded-lg overflow-hidden">
 					<div class="flex flex-col items-center space-y-2">
-						<div class="text-6xl font-bold tracking-tight leading-none text-white">{{ denuncia.contagem_denuncias }}</div>
+						<div class="text-6xl font-bold tracking-tight leading-none text-white">10</div>
 						<div class="text-lg font-bold text-white">Denuncias</div>
 					</div>
 				</div>
 				<!-- renovation -->
-				<div class="flex flex-col px-6 py-2 bg-green-700 shadow rounded-lg overflow-hidden">
+				<div class="flex flex-col px-6 py-2 bg-gray-900 shadow rounded-lg overflow-hidden">
 					<div class="flex flex-col items-center space-y-2">
 						<div class="text-6xl font-bold tracking-tight leading-none text-white">17</div>
 						<div class="text-lg font-bold text-white">Resolvido</div>
 					</div>
 				</div>
-				{% endfor %}
 			</div>
 		</section>
-	</div>
 
-	<!-- CONTENT GOES HERE 2 -->
-	<div class="flex flex-col sm:flex-row sm:gap-5 h-full w-full mx-auto space-y-6">
-		<!-- component -->
+		<!--card-->
+		<div class="flex flex-col sm:flex-row gap-6">
 		{% for denuncia in denuncias %}
 			<div class="relative flex w-full max-w-[26rem] h-full flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
 				<div class="relative mx-4 mt-4 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
@@ -126,7 +110,7 @@
 				<div class="mb-1 flex flex-row items-center gap-1.5">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="mt-0.5 h-6 w-6 text-blue-gray-900">
 						<path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clipRule="evenodd" />
-					  </svg>					  
+					</svg>					  
 					<h4 class="block font-sans text-xl font-bold leading-snug tracking-normal text-blue-gray-900 antialiased">
 						{{ denuncia.nome_visivel }}
 					</h4>
@@ -150,12 +134,12 @@
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="mt-0.5 h-6 w-6 text-blue-gray-900">
 						<path d="M12.75 12.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM7.5 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM8.25 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM9.75 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM10.5 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM12.75 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM14.25 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM15 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM16.5 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM15 12.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM16.5 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" />
 						<path fillRule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z" clipRule="evenodd" />
-					  </svg>
-					  
+					</svg>
+					
 					</svg>
 					{{ denuncia.data_registro|date:"d/m/Y H:i" }}
 					</p>
-
+		
 				<!--Indicador Situação-->
 				<div class="flex flex-row items-center justify-between group mt-4 inline-flex flex-wrap">
 					<p class="flex items-center font-sans font-light text-blue-gray-900 ">Situação:</p>
@@ -201,18 +185,18 @@
 						<p class="flex items-center gap-1.5 font-sans font-bold text-green-500 ">RESOLVIDO!</p>
 					</span>
 					{% endif %}
-
-
+		
+		
 					
 				</div>
 				</div>
-				<div class="flex flex-row gap-2 justify-between py-4 p-2 pt-3">
+				<div class="flex flex-row gap-2 justify-between py-4 p-4 pt-3">
 				<button
-					class="block w-full items-center select-none rounded-lg bg-gray-200 p-3 text-center align-middle font-sans text-sm font-bold uppercase text-blue-gray-600 shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-					type="button"
-					data-ripple-light="true"
+					class="w-full items-center select-none rounded-lg bg-gray-300 p-3 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+					type="submit"
+					
 				>
-					Detalhes
+				Detalhes
 				</button>
 				<form method="post" action="{% url 'denunciar_existente' denuncia.id %}">
 					{% csrf_token %}
@@ -239,13 +223,21 @@
 				</form>
 				</div>
 			</div>
-		{% endfor %}	
+		{% endfor %}
+		</div>	
+	</div>
+
+</main>
+
+	<!-- CONTENT GOES HERE 2 -->
+	<div class="flex flex-col sm:flex-row mx-auto max-w-screen-xl p-4 space-y-6">
+		<!-- component -->
 			<div class="w-full pt-5 px-4 mb-8 mx-auto ">
 				<div class="text-sm text-gray-700 py-1">
 					Made with <a class="text-gray-700 font-semibold" href="https://www.material-tailwind.com/docs/html/card?ref=tailwindcomponents" target="_blank">Material Tailwind</a> by <a href="https://www.creative-tim.com?ref=tailwindcomponents" class="text-gray-700 font-semibold" target="_blank"> Creative Tim</a>.
 				</div>
 			</div>
 	</div>
-</main>
+
   
 </bory>
