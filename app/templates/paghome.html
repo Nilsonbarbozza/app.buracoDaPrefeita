@@ -75,9 +75,9 @@
 		</section>
 
 		<!--card-->
-		<div class="flex flex-col sm:flex-row gap-6">
+		<div class="flex flex-wrap justify-center gap-6">
 		{% for denuncia in denuncias %}
-			<div class="relative flex w-full max-w-[26rem] h-full flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
+			<div class="relative flex w-full max-w-[22rem] h-full flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
 				<div class="relative mx-4 mt-4 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
 				<img class="max-h-[23rem] w-full"
 					src="{{ denuncia.foto.url }}"
@@ -85,7 +85,7 @@
 				/>
 				<div class="to-bg-black absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-red/60"></div>
 				<button
-					class="flex flex-row items-center absolute px-2 top-4 right-4 h-8 max-h-[64px] w-12 max-w-[64px] select-none rounded-lg text-center font-sans font-bold uppercase bg-red-600"
+					class="flex flex-row items-center justify-center gap-1 absolute px-2 top-4 right-4 h-8 max-h-[64px] w-14 max-w-[64px] select-none rounded-lg text-center font-sans font-bold uppercase bg-red-600"
 					type="button"
 				> {{ denuncia.denuncias_detalhadas.count }}
 					<span>
@@ -146,7 +146,7 @@
 					{% if denuncia.situacao == 'NAO_RESOLVIDO' %}
 					<span
 					data-tooltip-target="Não Resolvido"
-					class=" flex flex-row items-center gap-2 cursor-pointer rounded-full border border-red-500/5 bg-red-500/5 p-3 text-red-500 transition-colors hover:border-red-500/10 hover:bg-red-500/10 hover:!opacity-100 group-hover:opacity-70"
+					class=" flex flex-row items-center gap-2 rounded-full border border-red-500/5 bg-red-500/5 p-3 text-red-500 transition-colors hover:border-red-500/10 hover:bg-red-500/10 hover:!opacity-100 group-hover:opacity-70"
 					>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -167,7 +167,7 @@
 					<!--if resolvido-->
 					<span
 					data-tooltip-target="Resolvido"
-					class=" flex flex-row items-center gap-2 cursor-pointer rounded-full border border-green-500/5 bg-green-500/5 p-3 text-green-500 transition-colors hover:border-greennk-500/10 hover:bg-green-500/10 hover:!opacity-100 group-hover:opacity-70"
+					class=" flex flex-row items-center gap-2 rounded-full border border-green-500/5 bg-green-500/5 p-3 text-green-500 transition-colors hover:border-greennk-500/10 hover:bg-green-500/10 hover:!opacity-100 group-hover:opacity-70"
 					>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -192,7 +192,7 @@
 				</div>
 				<div class="flex flex-row gap-2 justify-between py-4 p-4 pt-3">
 				<button
-					class="flex flex-row items-center sm:items center gap-1 select-none rounded-lg bg-gray-100 p-3 text-center align-middle font-sans text-sm font-bold uppercase text-gray-900 shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+					class="flex flex-row items-center sm:items center cursor-pointer gap-1 select-none rounded-lg bg-gray-100 p-3 text-center align-middle font-sans text-sm font-bold uppercase text-gray-900 shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
 					type="submit"	
 				>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-8 w-8 text-black">
@@ -200,12 +200,12 @@
 				</svg>				  
 				Compartilhar
 				</button>
-					{% csrf_token %}
-					<button
-						class="  flex flex-row items-center gap-1 w-full select-none rounded-lg bg-red-600 p-3 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-						type="botton"
-						data-ripple-light="true"
-						onclick="abrirModal({{ denuncia.id }})"
+					
+				<button
+					class=" flex flex-row items-center cursor-pointer gap-2 w-full select-none rounded-lg bg-red-600 p-3 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+					type="botton"
+					data-ripple-light="true"
+					onclick="abrirModal({{ denuncia.id }})"
 					>
 					<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -221,28 +221,49 @@
 					></path>
 					</svg>
 					Denunciar
-					</button>
+				</button>
 				
-				<div id="modal-denuncia" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
-					<div class="bg-white p-6 rounded-lg max-w-md w-full relative">
-					  <button onclick="fecharModal()" class="absolute top-2 right-2 text-red-600 font-bold">X</button>
+				<div id="modal-denuncia" class="fixed inset-0 z-50 p-4 hidden flex items-center justify-center  shadow-black-500/20 backdrop-blur-sm bg-black/30">
+					<div class="relative w-full max-w-md bg-gray-100 backdrop-blur-md shadow-xl rounded-2xl border border-white/20 p-6">
+					  
+					  <!-- Botão de fechar -->
+					  <button onclick="fecharModal()" class="absolute bg-red-700 top-2 px-2 right-2 rounded-lg text-white font-bold text-lg hover:scale-110 transition-transform">
+						✕
+					  </button>
+				  
+					  <!-- Formulário -->
 					  <form id="form-denuncia">
 						{% csrf_token %}
 						<input type="hidden" name="denuncia_id" id="denuncia_id">
-						<div class="mb-2">
-						  <input type="text" name="nome" placeholder="Nome" required class="w-full border p-2 rounded">
+						
+						<h2 class="text-gray-900 text-xl font-semibold mb-4 text-center">Reportar sua Denúncia</h2>
+						
+						<div class="mb-3">
+						  <input type="text" name="nome" placeholder="Digitar nome" required
+								 class="w-full p-2 rounded-lg bg-white text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
 						</div>
-						<div class="mb-2">
-						  <input type="email" name="email" placeholder="Email" required class="w-full border p-2 rounded">
+				  
+						<div class="mb-3">
+						  <input type="email" name="email" placeholder="Digitar E-mail" required
+								 class="w-full p-2 rounded-lg bg-white text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
 						</div>
-						<div class="mb-2">
-						  <input type="text" name="telefone" placeholder="Telefone" required class="w-full border p-2 rounded">
+				  
+						<div class="mb-4">
+						  <input type="text" name="telefone" id="telefone" placeholder="(xx) xxxxx-xxxx" required
+								 class="w-full p-2 rounded-lg bg-white text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
 						</div>
-						<button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">OK</button>
+				  
+						<button type="submit"
+								class="w-full cursor-pointer bg-green-700 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition duration-200">
+						  Enviar
+						</button>
+						<p class="text-xs py-4 text-gray-900 text-center mb-4">
+							🔒 Seus dados estão protegidos. Esta denúncia é <strong>anônima</strong> e garantida pela Lei do Marco Civil da Internet.
+						</p>
 					  </form>
 					</div>
 				  </div>
-				</div>
+				  
 			</div>
 		{% endfor %}
 		</div>	
@@ -259,6 +280,7 @@
 				</div>
 			</div>
 	</div>
+	
 
 	<script>
 		function abrirModal(denunciaId) {
@@ -304,6 +326,50 @@
 		  });
 		});
 		</script>
+
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+			  const telefoneInput = document.getElementById('telefone');
+			
+			  telefoneInput.addEventListener('input', function (e) {
+				let value = e.target.value.replace(/\D/g, '');
+			
+				if (value.length > 11) value = value.slice(0, 11);
+			
+				let formatted = '';
+				if (value.length > 0) {
+				  formatted += '(' + value.substring(0, 2);
+				}
+				if (value.length >= 3) {
+				  formatted += ') ' + value.substring(2, 7);
+				}
+				if (value.length >= 8) {
+				  formatted += '-' + value.substring(7, 11);
+				}
+			
+				e.target.value = formatted;
+			  });
+			
+			  // Evita que o usuário digite letras
+			  telefoneInput.addEventListener('keypress', function (e) {
+				if (!/\d/.test(e.key)) {
+				  e.preventDefault();
+				}
+			  });
+			
+			  // Corrige problemas ao apagar
+			  telefoneInput.addEventListener('keydown', function (e) {
+				const key = e.key;
+				if (key === 'Backspace') {
+				  const val = e.target.value;
+				  if (val.endsWith('-') || val.endsWith(') ') || val.endsWith('(')) {
+					e.target.value = val.slice(0, -1);
+				  }
+				}
+			  });
+			});
+			</script>
+			
 		
 		
   
