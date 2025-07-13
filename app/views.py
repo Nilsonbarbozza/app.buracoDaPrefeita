@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import CidadeDenuncia, Denuncia
+from django.http import JsonResponse
+from .models import CidadeDenuncia, Denuncia, DenunciaDetalhada
 from django.contrib import messages
-
+from .forms import DenunciaDetalhadaForm
 
 def home(request):
     denuncias = Denuncia.objects.filter(ativo=True).order_by('-data_registro')
@@ -57,3 +58,18 @@ def denunciar_existente(request, denuncia_id):
         denuncia.contagem_denuncias += 1
         denuncia.save()
     return redirect('home')  # ou outra view que mostra os cards
+
+def denunciar_existente_modal(request, denuncia_id):
+    denuncia = get_object_or_404(Denuncia, pk=denuncia_id)
+
+    if request.method == 'POST':
+        form = DenunciaDetalhadaForm(request.POST)
+        if form.is_valid():
+            nova_denuncia = form.save(commit=False)
+            nova_denuncia.denuncia = denuncia
+            nova_denuncia.save()
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
+    
+    return JsonResponse({'error': 'Método inválido'}, status=400)

@@ -58,14 +58,14 @@
 			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
 				<!-- In use -->
 				
-				<div class="flex flex-col px-6 py-2 bg-gray-900 shadow rounded-lg overflow-hidden">
+				<div class="flex flex-col px-6 py-2 bg-red-600 shadow rounded-lg overflow-hidden">
 					<div class="flex flex-col items-center space-y-2">
 						<div class="text-6xl font-bold tracking-tight leading-none text-white">10</div>
 						<div class="text-lg font-bold text-white">Denuncias</div>
 					</div>
 				</div>
 				<!-- renovation -->
-				<div class="flex flex-col px-6 py-2 bg-gray-900 shadow rounded-lg overflow-hidden">
+				<div class="flex flex-col px-6 py-2 bg-green-700 shadow rounded-lg overflow-hidden">
 					<div class="flex flex-col items-center space-y-2">
 						<div class="text-6xl font-bold tracking-tight leading-none text-white">17</div>
 						<div class="text-lg font-bold text-white">Resolvido</div>
@@ -79,29 +79,29 @@
 		{% for denuncia in denuncias %}
 			<div class="relative flex w-full max-w-[26rem] h-full flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
 				<div class="relative mx-4 mt-4 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
-				<img class="h-[20rem]"
+				<img class="max-h-[23rem] w-full"
 					src="{{ denuncia.foto.url }}"
-					alt="Pahto-denuncia"
+					alt="Patho-denuncia"
 				/>
-				<div class="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-red/60"></div>
+				<div class="to-bg-black absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-red/60"></div>
 				<button
-					class="!absolute top-4 right-4 h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-red-500 transition-all hover:bg-red-500/10 active:bg-red-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+					class="flex flex-row items-center absolute px-2 top-4 right-4 h-8 max-h-[64px] w-12 max-w-[64px] select-none rounded-lg text-center font-sans font-bold uppercase bg-red-600"
 					type="button"
-					data-ripple-dark="true"
-				>
-					<span class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 transform">
-					<svg
+				> {{ denuncia.denuncias_detalhadas.count }}
+					<span>
+						<svg
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 24 24"
 						fill="currentColor"
 						aria-hidden="true"
-						class="h-6 w-6"
+						class="h-6 w-6 text-white"
 					>
-						<path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"></path>
-						<p class="text-sm text-blue-gray-700 font-medium mt-2">
-							Denúncias registradas: {{ denuncia.contagem_denuncias }}
-						</p>
-					</svg>
+						<path
+						fill-rule="evenodd"
+						d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-2.625 6c-.54 0-.828.419-.936.634a1.96 1.96 0 0 0-.189.866c0 .298.059.605.189.866.108.215.395.634.936.634.54 0 .828-.419.936-.634.13-.26.189-.568.189-.866 0-.298-.059-.605-.189-.866-.108-.215-.395-.634-.936-.634Zm4.314.634c.108-.215.395-.634.936-.634.54 0 .828.419.936.634.13.26.189.568.189.866 0 .298-.059.605-.189.866-.108.215-.395.634-.936.634-.54 0-.828-.419-.936-.634a1.96 1.96 0 0 1-.189-.866c0-.298.059-.605.189-.866Zm-4.34 7.964a.75.75 0 0 1-1.061-1.06 5.236 5.236 0 0 1 3.73-1.538 5.236 5.236 0 0 1 3.695 1.538.75.75 0 1 1-1.061 1.06 3.736 3.736 0 0 0-2.639-1.098 3.736 3.736 0 0 0-2.664 1.098Z"
+						clip-rule="evenodd"
+						></path>
+						</svg>
 					</span>
 				</button>
 				</div>
@@ -192,18 +192,20 @@
 				</div>
 				<div class="flex flex-row gap-2 justify-between py-4 p-4 pt-3">
 				<button
-					class="w-full items-center select-none rounded-lg bg-gray-300 p-3 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-					type="submit"
-					
+					class="flex flex-row items-center sm:items center gap-1 select-none rounded-lg bg-gray-100 p-3 text-center align-middle font-sans text-sm font-bold uppercase text-gray-900 shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+					type="submit"	
 				>
-				Detalhes
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-8 w-8 text-black">
+					<path fillRule="evenodd" d="M15.75 4.5a3 3 0 1 1 .825 2.066l-8.421 4.679a3.002 3.002 0 0 1 0 1.51l8.421 4.679a3 3 0 1 1-.729 1.31l-8.421-4.678a3 3 0 1 1 0-4.132l8.421-4.679a3 3 0 0 1-.096-.755Z" clipRule="evenodd" />
+				</svg>				  
+				Compartilhar
 				</button>
-				<form method="post" action="{% url 'denunciar_existente' denuncia.id %}">
 					{% csrf_token %}
 					<button
-						class="flex flex-row items-center gap-1 w-full select-none rounded-lg bg-red-500 p-3 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-						type="submit"
+						class="  flex flex-row items-center gap-1 w-full select-none rounded-lg bg-red-600 p-3 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+						type="botton"
 						data-ripple-light="true"
+						onclick="abrirModal({{ denuncia.id }})"
 					>
 					<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -220,7 +222,26 @@
 					</svg>
 					Denunciar
 					</button>
-				</form>
+				
+				<div id="modal-denuncia" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+					<div class="bg-white p-6 rounded-lg max-w-md w-full relative">
+					  <button onclick="fecharModal()" class="absolute top-2 right-2 text-red-600 font-bold">X</button>
+					  <form id="form-denuncia">
+						{% csrf_token %}
+						<input type="hidden" name="denuncia_id" id="denuncia_id">
+						<div class="mb-2">
+						  <input type="text" name="nome" placeholder="Nome" required class="w-full border p-2 rounded">
+						</div>
+						<div class="mb-2">
+						  <input type="email" name="email" placeholder="Email" required class="w-full border p-2 rounded">
+						</div>
+						<div class="mb-2">
+						  <input type="text" name="telefone" placeholder="Telefone" required class="w-full border p-2 rounded">
+						</div>
+						<button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">OK</button>
+					  </form>
+					</div>
+				  </div>
 				</div>
 			</div>
 		{% endfor %}
@@ -239,5 +260,51 @@
 			</div>
 	</div>
 
+	<script>
+		function abrirModal(denunciaId) {
+		  document.getElementById('modal-denuncia').classList.remove('hidden');
+		  document.getElementById('denuncia_id').value = denunciaId;
+		}
+		
+		function fecharModal() {
+		  document.getElementById('modal-denuncia').classList.add('hidden');
+		}
+		
+		// Intercepta o submit do formulário do modal
+		document.addEventListener('DOMContentLoaded', function () {
+		  const form = document.getElementById('form-denuncia');
+		
+		  form.addEventListener('submit', function (e) {
+			e.preventDefault(); // impede o envio tradicional do form
+		
+			const formData = new FormData(form);
+			const denunciaId = formData.get('denuncia_id');
+		
+			fetch(`/denunciar_modal/${denunciaId}/`, {
+			  method: 'POST',
+			  headers: {
+				'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+			  },
+			  body: formData
+			})
+			.then(response => response.json())
+			.then(data => {
+			  if (data.success) {
+				fecharModal();
+				location.reload(); // recarrega página para atualizar contagem
+			  } else {
+				console.error('Erro ao enviar:', data.errors);
+				alert('Erro ao enviar a denúncia. Verifique os campos.');
+			  }
+			})
+			.catch(error => {
+			  console.error('Erro na requisição:', error);
+			  alert('Erro inesperado ao enviar a denúncia.');
+			});
+		  });
+		});
+		</script>
+		
+		
   
 </bory>

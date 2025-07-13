@@ -50,3 +50,15 @@ class Denuncia(models.Model):
 
     def __str__(self):
         return f"{self.nome_visivel()} - {self.endereco[:30]}..."
+
+# denunciantes-id/models.py
+
+class DenunciaDetalhada(models.Model):
+    denuncia = models.ForeignKey('Denuncia', on_delete=models.CASCADE, related_name='denuncias_detalhadas')
+    nome = models.CharField(max_length=100)
+    email = models.EmailField()
+    telefone = models.CharField(max_length=20)
+    criado_em = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.nome} - {self.denuncia}"
