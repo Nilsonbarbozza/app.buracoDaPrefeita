@@ -3,10 +3,38 @@ from django.http import JsonResponse
 from .models import CidadeDenuncia, Denuncia, DenunciaDetalhada
 from django.contrib import messages
 from .forms import DenunciaDetalhadaForm
+from django.template.loader import render_to_string
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 def home(request):
-    denuncias = Denuncia.objects.filter(ativo=True).order_by('-data_registro')
-    return render(request, 'paghome.html', {'denuncias': denuncias})
+    page = request.GET.get("page") or 1
+    try:
+        page = int(page)
+    except ValueError:
+        page = 1
+
+    all_denuncias = Denuncia.objects.filter(ativo=True).order_by('-data_registro')
+    paginator = Paginator(all_denuncias, 7)
+
+    # Ajax: carregar mais cards dinamicamente
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        try:
+            denuncias = paginator.page(page)
+        except (EmptyPage, PageNotAnInteger):
+            # Quando a página não existe, retornar html vazio para parar o JS
+            return JsonResponse({"html": ""})
+
+        html = render_to_string("partials/_card_denuncia.html", {"denuncias": denuncias}, request=request)
+        return JsonResponse({"html": html})
+
+    # Página normal (primeira)
+    denuncias = paginator.page(1)
+    return render(request, "paghome.html", {"denuncias": denuncias})
+
+
+
 
 # views.py
 def buscar_por_cidade(request):
@@ -73,3 +101,7 @@ def denunciar_existente_modal(request, denuncia_id):
             return JsonResponse({'success': False, 'errors': form.errors})
     
     return JsonResponse({'error': 'Método inválido'}, status=400)
+
+def checkout(request):
+    if request.method == 'GET':
+        return render(request, 'checkout.html')
