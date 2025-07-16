@@ -4,34 +4,49 @@ from .models import CidadeDenuncia, Denuncia, DenunciaDetalhada
 from django.contrib import messages
 from .forms import DenunciaDetalhadaForm
 from django.template.loader import render_to_string
-
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def home(request):
+    cidade_filtro = request.GET.get("cidade")
     page = request.GET.get("page") or 1
+
     try:
         page = int(page)
     except ValueError:
         page = 1
 
-    all_denuncias = Denuncia.objects.filter(ativo=True).order_by('-data_registro')
-    paginator = Paginator(all_denuncias, 7)
+    # Aplica filtro se cidade for informada
+    if cidade_filtro:
+        base_query = Denuncia.objects.filter(ativo=True, endereco__icontains=cidade_filtro).order_by('-data_registro')
+    else:
+        base_query = Denuncia.objects.filter(ativo=True).order_by('-data_registro')
+
+    paginator = Paginator(base_query, 7)
 
     # Ajax: carregar mais cards dinamicamente
     if request.headers.get("x-requested-with") == "XMLHttpRequest":
         try:
             denuncias = paginator.page(page)
         except (EmptyPage, PageNotAnInteger):
-            # Quando a página não existe, retornar html vazio para parar o JS
             return JsonResponse({"html": ""})
 
         html = render_to_string("partials/_card_denuncia.html", {"denuncias": denuncias}, request=request)
         return JsonResponse({"html": html})
 
-    # Página normal (primeira)
-    denuncias = paginator.page(1)
-    return render(request, "paghome.html", {"denuncias": denuncias})
+    try:
+        denuncias = paginator.page(1)
+    except (EmptyPage, PageNotAnInteger):
+        denuncias = []
+
+    cidades = CidadeDenuncia.objects.filter(ativo=True)
+
+    context = {
+        "denuncias": denuncias,
+        "cidades": cidades,
+        "cidade_selecionada": cidade_filtro
+    }
+    return render(request, "paghome.html", context)
 
 
 

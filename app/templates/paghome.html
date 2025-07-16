@@ -29,11 +29,25 @@
     <div class="container mx-auto max-w-screen-xl px-4">
 
       <!-- Filtros e Estatísticas -->
-      <section class="mb-10 bg-white rounded-lg p-6 shadow space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <button class="w-full bg-gray-900 text-white font-medium py-2 rounded">Buracomômetro</button>
+      <section class="mb-6 bg-white rounded-lg p-6 shadow space-y-6">
 
-          <form method="GET" action="" class="flex flex-col md:flex-row md:items-center gap-2 md:col-span-2">
+        <!-- Estatísticas -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="bg-gray-200 text-center rounded-lg py-4">
+            <div class="text-6xl text-blue-gray-900 font-bold">10</div>
+            <div class="text-lg text-red-700 font-bold">Denúncias</div>
+          </div>
+          <div class="bg-gray-200 text-center rounded-lg py-4">
+            <div class="text-6xl text-blue-gray-900 font-bold">17</div>
+            <div class="text-lg text-green-700 font-bold">Resolvidos</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filtros -->
+      <section class="mb-6 bg-white rounded-lg p-6 shadow space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <form method="GET" action="{% url 'home'%}" class="flex flex-col md:flex-row md:items-center gap-2 md:col-span-2">
             <div class="relative w-full">
               <select name="cidade" id="cidade" class="block w-full p-3 ps-10 text-sm border rounded bg-gray-100 focus:ring-blue-500">
                 <option value="">Selecione sua cidade</option>
@@ -48,19 +62,9 @@
             <button type="submit" class="px-4 py-2 text-blue-500 border border-blue-500 rounded hover:bg-blue-50">Buscar</button>
           </form>
         </div>
-
-        <!-- Estatísticas -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          <div class="bg-red-600 text-white text-center rounded-lg py-4">
-            <div class="text-6xl font-bold">10</div>
-            <div class="text-lg font-bold">Denúncias</div>
-          </div>
-          <div class="bg-green-700 text-white text-center rounded-lg py-4">
-            <div class="text-6xl font-bold">17</div>
-            <div class="text-lg font-bold">Resolvidos</div>
-          </div>
-        </div>
       </section>
+
+      
 
       <!-- Cards das Denúncias -->
       <section id="denuncias-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 sm:gap-6">    
@@ -130,7 +134,7 @@
                 class="w-full cursor-pointer bg-green-700 hover:bg-green-600 text-white font-semibold border-l-4 border-green-500 text-white p-3 rounded-lg transition duration-300 ease-in-out hover:bg-green-800 dark:hover:bg-green-800 transform hover:scale-105">
           Enviar
         </button>
-        <p class="text-xs py-4 text-gray-900 text-center mb-4">
+        <p class="text-xs py-4 text-blue-gray-900 text-center mb-4">
             🔒 Seus dados estão protegidos. Esta denúncia é <strong>anônima</strong> e garantida pela Lei do Marco Civil da Internet.
         </p>
       </form>
