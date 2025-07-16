@@ -1,135 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔒 Cadastro de denúncia</title>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-</html>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🔒 Cadastro de denúncia</title>
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
 <body>
   <header>
-		<nav class="bg-gray-900 border-gray-200 dark:bg-gray-900">
-			<div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-				<a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse">
-					<img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-					<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-				</a>
-				<div class="flex items-center space-x-3 rtl:space-x-reverse">
-					<a href="tel:5541251234" class="text-sm  text-white dark:text-white hover:underline">Contato</a>
-					<a href="{% url 'home' %}" class="font-bold text-white dark:text-bg-white hover:underline">Home</a>
-				</div>
-			</div>
-		</nav>
-	</header>
+    <nav class="bg-gray-900 border-gray-200 dark:bg-gray-900">
+      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+        <a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+        </a>
+        <div class="flex items-center space-x-3 rtl:space-x-reverse">
+          <a href="tel:5541251234" class="text-sm text-white hover:underline">Contato</a>
+          <a href="{% url 'home' %}" class="font-bold text-white hover:underline">Home</a>
+        </div>
+      </div>
+    </nav>
+  </header>
 
   <main>
-  <div class="min-h-screen flex justify-center pt-10 p-4 backdrop-blur-sm bg-black/20">
-    <form method="POST" enctype="multipart/form-data" action="{% url 'enviar_denuncia' %}"
-          class="w-full h-full max-w-2xl bg-gray-100 backdrop-blur-md border border-white/20 shadow-xl rounded-2xl p-6 space-y-5">
-      {% csrf_token %}
-  
-      <h2 class="text-2xl font-bold text-gray-900 text-center">📸 Nova Denúncia</h2>
-  
-      <!-- Foto do buraco -->
-      <div class="mb-3">
-        <label class="block mb-2 text-sm font-medium text-gray-900">Foto do buraco</label>
-        <label for="foto" class="flex items-center justify-center w-full h-32 border-2 border-dashed border-blue-200 rounded-lg cursor-pointer bg-white/80 hover:bg-gray-100 transition">
-          <span class="text-gray-700">Clique para enviar imagem</span>
-          <input id="foto" type="file" name="foto" accept="image/*" required class="hidden">
-        </label>
-      </div>
-  
-      <!-- Nome do denunciante -->
-      <div>
-        <p class="text-xs py-2 text-gray-900">
-          🔑Esta denúncia pode ser <strong>anônima</strong> Você pode deixar o campo nome em branco.
-        </p>
-        <input type="text" name="nome_denunciante" placeholder="Digitar nome"
-               class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
-      </div>
-  
-      <!-- Email -->
-      <div>
-        <input type="email" name="email" placeholder="Seu e-mail" required
-               class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
-      </div>
-  
-      <!-- Telefone -->
-      <div>
-        <input type="text" name="telefone" id="telefone" placeholder="(xx) xxxxx-xxxx" required
-               class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
-      </div>
-  
-      <!-- Endereço -->
-      <div>
-        <input type="text" name="endereco" placeholder="Endereço completo" required
-               class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
-      </div>
-  
-      <!-- Cidade -->
-      <div>
-        <select name="cidade" required
-                class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
-          <option value="">Selecione a cidade</option>
-          {% for cidade in cidades %}
-            <option value="{{ cidade.id }}">{{ cidade.get_nome_display }}</option>
-          {% endfor %}
-        </select>
-      </div>
-  
-      <!-- Aviso legal -->
-      <p class="text-xs text-gray-900 text-center">
-        🔒 Seus dados estão protegidos. Esta denúncia pode ser <strong>anônima</strong> e garantida pela Lei do Marco Civil da Internet.
-      </p>
-  
-      <!-- Botão -->
-      <div class="pt-2">
-        <button type="submit"
-                class="w-full bg-green-700 hover:bg-green-800 text-white font-semibold py-3 rounded-lg transition duration-200">
-          Enviar denúncia
-        </button>
-      </div>
-    </form>
-  </div>
-</main>
+    <div class="min-h-screen flex justify-center pt-10 p-4 backdrop-blur-sm bg-black/20">
+      <form method="POST" enctype="multipart/form-data" action="{% url 'enviar_denuncia' %}"
+            class="w-full max-w-2xl bg-gray-100 backdrop-blur-md border border-white/20 shadow-xl rounded-2xl p-6 space-y-5">
+        {% csrf_token %}
 
-	<!-- CONTENT GOES HERE 2 -->
-	<div class="flex flex-col sm:flex-row mx-auto max-w-screen-xl p-4 space-y-6">
-		<!-- component -->
-			<div class="w-full pt-5 px-4 mb-8 mx-auto ">
-				<div class="text-sm text-gray-700 py-1">
-					Made with <a class="text-gray-700 font-semibold" href="https://www.material-tailwind.com/docs/html/card?ref=tailwindcomponents" target="_blank">Material Tailwind</a> by <a href="https://www.creative-tim.com?ref=tailwindcomponents" class="text-gray-700 font-semibold" target="_blank"> Creative Tim</a>.
-				</div>
-			</div>
-	</div>
+        <h2 class="text-2xl font-bold text-gray-900 text-center">📸 Nova Denúncia</h2>
+
+        <!-- Foto do buraco -->
+        <div class="mb-3 items-center">
+          
+          <label for="foto" class="cursor-pointer p-12 flex flex-col justify-center bg-white border border-dashed border-gray-300 rounded-xl" data-hs-file-upload-trigger>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+            </svg>                     
+            Foto do buraco (máx 2MB)
+          </label>
+
+          <input id="foto" type="file" name="foto" accept="image/*" required class="hidden" />
+
+          <!-- Container para o preview da imagem -->
+          <div id="preview-container" class="mt-4 space-y-2 empty:mt-0"></div>
+        </div>
+
+        <!-- Outros campos do formulário -->
+        <div>
+          <p class="text-xs py-2 text-gray-900">
+            🔑Esta denúncia pode ser <strong>anônima</strong>. Você pode deixar o campo nome em branco.
+          </p>
+          <input type="text" name="nome_denunciante" placeholder="Digitar nome"
+                 class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500" />
+        </div>
+
+        <div>
+          <input type="email" name="email" placeholder="Seu e-mail" required
+                 class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500" />
+        </div>
+
+        <div>
+          <input type="text" name="telefone" id="telefone" placeholder="(xx) xxxxx-xxxx" required
+                 class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500" />
+        </div>
+
+        <div>
+          <input type="text" name="endereco" placeholder="Endereço completo" required
+                 class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500" />
+        </div>
+
+        <div>
+          <select name="cidade" required
+                  class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
+            <option value="">Selecione a cidade</option>
+            {% for cidade in cidades %}
+              <option value="{{ cidade.id }}">{{ cidade.get_nome_display }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <p class="text-xs text-gray-900 text-center">
+          🔒 Seus dados estão protegidos. Esta denúncia pode ser <strong>anônima</strong> e garantida pela Lei do Marco Civil da Internet.
+        </p>
+
+        <div class="pt-2">
+          <button type="submit"
+                  class="w-full bg-green-700 hover:bg-green-800 text-white font-semibold py-3 rounded-lg transition duration-200">
+            Enviar denúncia
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    // Máscara simples para telefone
+    document.addEventListener("DOMContentLoaded", () => {
       const telefoneInput = document.getElementById('telefone');
-    
-      telefoneInput.addEventListener('input', function (e) {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length > 11) value = value.slice(0, 11);
-    
+
+      telefoneInput.addEventListener('input', (e) => {
+        let val = e.target.value.replace(/\D/g, '');
+        if (val.length > 11) val = val.slice(0, 11);
+
         let formatted = '';
-        if (value.length > 0) formatted += '(' + value.substring(0, 2);
-        if (value.length >= 3) formatted += ') ' + value.substring(2, 7);
-        if (value.length >= 8) formatted += '-' + value.substring(7, 11);
+        if (val.length > 0) formatted += '(' + val.substring(0, 2);
+        if (val.length >= 3) formatted += ') ' + val.substring(2, 7);
+        if (val.length >= 8) formatted += '-' + val.substring(7, 11);
         e.target.value = formatted;
       });
-    
-      telefoneInput.addEventListener('keypress', function (e) {
+
+      telefoneInput.addEventListener('keypress', (e) => {
         if (!/\d/.test(e.key)) e.preventDefault();
       });
-    
-      telefoneInput.addEventListener('keydown', function (e) {
+
+      telefoneInput.addEventListener('keydown', (e) => {
         const val = e.target.value;
         if (e.key === 'Backspace' && (val.endsWith('-') || val.endsWith(') ') || val.endsWith('('))) {
           e.target.value = val.slice(0, -1);
         }
       });
+
+      // Preview da imagem
+      const inputFoto = document.getElementById('foto');
+      const previewContainer = document.getElementById('preview-container');
+
+      inputFoto.addEventListener('change', () => {
+        previewContainer.innerHTML = ''; // limpa preview anterior
+        const file = inputFoto.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+          alert('Por favor, envie um arquivo de imagem válido.');
+          inputFoto.value = '';
+          return;
+        }
+
+        const img = document.createElement('img');
+        img.classList.add('max-h-48', 'rounded-lg', 'shadow-lg');
+        img.alt = "Prévia da imagem selecionada";
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          img.src = e.target.result;
+          previewContainer.appendChild(img);
+          // animação simples fade-in:
+          img.style.opacity = 0;
+          img.style.transition = 'opacity 0.5s ease-in-out';
+          setTimeout(() => { img.style.opacity = 1; }, 50);
+        };
+        reader.readAsDataURL(file);
+      });
     });
-    </script>
-    
-</bory>
+  </script>
+</body>
+</html>

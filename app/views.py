@@ -18,11 +18,11 @@ def home(request):
 
     # Aplica filtro se cidade for informada
     if cidade_filtro:
-        base_query = Denuncia.objects.filter(ativo=True, endereco__icontains=cidade_filtro).order_by('-data_registro')
+        denuncias_filtradas = Denuncia.objects.filter(cidade__nome=cidade_filtro, ativo=True).order_by('-data_registro')
     else:
-        base_query = Denuncia.objects.filter(ativo=True).order_by('-data_registro')
+        denuncias_filtradas = Denuncia.objects.filter(ativo=True).order_by('-data_registro')
 
-    paginator = Paginator(base_query, 7)
+    paginator = Paginator(denuncias_filtradas, 7)
 
     # Ajax: carregar mais cards dinamicamente
     if request.headers.get("x-requested-with") == "XMLHttpRequest":
@@ -34,18 +34,24 @@ def home(request):
         html = render_to_string("partials/_card_denuncia.html", {"denuncias": denuncias}, request=request)
         return JsonResponse({"html": html})
 
+    # Corrigido aqui
     try:
-        denuncias = paginator.page(1)
+        denuncias_paginadas = paginator.page(page)
     except (EmptyPage, PageNotAnInteger):
-        denuncias = []
+        denuncias_paginadas = []
 
     cidades = CidadeDenuncia.objects.filter(ativo=True)
 
     context = {
-        "denuncias": denuncias,
+        "denuncias": denuncias_paginadas,  # agora sim o template usa só os paginados corretos
         "cidades": cidades,
         "cidade_selecionada": cidade_filtro
     }
+
+    # Opcional: log para debug
+    for denuncia in denuncias_paginadas:
+        print(f"Denúncia: {denuncia.endereco}, Cidade: {denuncia.cidade.nome}")
+
     return render(request, "paghome.html", context)
 
 

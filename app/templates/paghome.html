@@ -47,12 +47,14 @@
       <!-- Filtros -->
       <section class="mb-6 bg-white rounded-lg p-6 shadow space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <form method="GET" action="{% url 'home'%}" class="flex flex-col md:flex-row md:items-center gap-2 md:col-span-2">
+          <form method="GET" action="{% url 'home' %}" class="flex flex-col md:flex-row md:items-center gap-2 md:col-span-2">
             <div class="relative w-full">
               <select name="cidade" id="cidade" class="block w-full p-3 ps-10 text-sm border rounded bg-gray-100 focus:ring-blue-500">
-                <option value="">Selecione sua cidade</option>
+                <option value="">Todas as Cidades</option>
                 {% for cidade in cidades %}
-                  <option value="{{ cidade.nome }}">{{ cidade.nome }}</option>
+                <option value="{{ cidade.nome }}" {% if cidade.nome == cidade_selecionada %}selected{% endif %}>
+                  {{ cidade.get_nome_display }}
+                </option>                
                 {% endfor %}
               </select>
               <div class="absolute left-3 top-1/2 -translate-y-1/2">
@@ -61,9 +63,15 @@
             </div>
             <button type="submit" class="px-4 py-2 text-blue-500 border border-blue-500 rounded hover:bg-blue-50">Buscar</button>
           </form>
+          
+          {% if cidade_selecionada %}
+            <p class="text-sm text-gray-500">📍 Mostrando denúncias de: {{ cidade_selecionada }}</p>
+          {% else %}
+            <p class="text-sm text-gray-500">📍 Todas as cidades</p>
+          {% endif %}
         </div>
       </section>
-
+      
       
 
       <!-- Cards das Denúncias -->
@@ -141,12 +149,11 @@
     </div>
   </div>
 
-  <!-- ScriptsScroll -->
   <script>
     let page = 2;
     const loader = document.getElementById('loader');
     const container = document.getElementById('denuncias-container');
-    
+  
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         loadMore();
@@ -154,11 +161,15 @@
     }, {
       rootMargin: '100px',
     });
-    
+  
     observer.observe(loader);
-    
+  
     function loadMore() {
-      fetch(`{% url 'home' %}?page=${page}`, {
+      // Pega os parâmetros da URL atual (ex: cidade=MOSSORO)
+      const currentParams = new URLSearchParams(window.location.search);
+      currentParams.set("page", page);
+  
+      fetch(`{% url 'home' %}?${currentParams.toString()}`, {
         headers: { "X-Requested-With": "XMLHttpRequest" }
       })
       .then(res => res.json())
@@ -167,12 +178,13 @@
           container.insertAdjacentHTML("beforeend", data.html);
           page++;
         } else {
-          loader.innerHTML = "<p class='text-gray-400 text-sm'>Todos as denuncias foram carregados.</p>";
+          loader.innerHTML = "<p class='text-gray-400 text-sm'>Todas as denúncias foram carregadas.</p>";
           observer.disconnect();
         }
       });
     }
-    </script>
+  </script>
+  
     
 
   <!-- ScriptsModalDenunciar -->
