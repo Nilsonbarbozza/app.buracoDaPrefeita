@@ -6,7 +6,8 @@
   <title>🔒 Cadastro de denúncia</title>
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
-<body>
+
+<body class="bg-gray-100">
   <header>
     <nav class="bg-gray-900 border-gray-200 dark:bg-gray-900">
       <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
@@ -22,10 +23,10 @@
     </nav>
   </header>
 
-  <main>
-    <div class="min-h-screen flex justify-center pt-10 p-4 backdrop-blur-sm bg-black/20">
+  <main class=" bg-gray-100 py-10">
+    <div class="min-h-screen flex justify-center pt-10 p-4 backdrop-blur-sm bg-gray-100">
       <form method="POST" enctype="multipart/form-data" action="{% url 'enviar_denuncia' %}"
-            class="w-full max-w-2xl bg-gray-100 backdrop-blur-md border border-white/20 shadow-xl rounded-2xl p-6 space-y-5">
+            class="w-full max-w-2xl bg-gray-100 backdrop-blur-md border border-white/20 shadow-2xl rounded-2xl p-6 space-y-5">
         {% csrf_token %}
 
         <h2 class="text-2xl font-bold text-gray-900 text-center">📸 Nova Denúncia</h2>
@@ -33,11 +34,14 @@
         <!-- Foto do buraco -->
         <div class="mb-3 items-center">
           
-          <label for="foto" class="cursor-pointer p-12 flex flex-col justify-center bg-white border border-dashed border-gray-300 rounded-xl" data-hs-file-upload-trigger>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-            </svg>                     
-            Foto do buraco (máx 2MB)
+          <label for="foto" class="cursor-pointer p-12 flex flex-col justify-center bg-white border border-dashed border-blue-300 rounded-xl" data-hs-file-upload-trigger>
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+              <svg class="w-12 h-12 mb-1 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+              </svg>
+              <p class="mb-2 flex flex-col items-center justify-center text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold text-blue-500">Click para fazer upload</span> ou arraste e solte</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG (MAX. 2MB, 800x400px)</p>
+          </div>
           </label>
 
           <input id="foto" type="file" name="foto" accept="image/*" required class="hidden" />
@@ -48,11 +52,11 @@
 
         <!-- Outros campos do formulário -->
         <div>
-          <p class="text-xs py-2 text-gray-900">
+          <input type="text" name="nome_denunciante" placeholder="Digitar nome"
+          class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500" />
+          <p class="text-xs py-1 text-gray-900">
             🔑Esta denúncia pode ser <strong>anônima</strong>. Você pode deixar o campo nome em branco.
           </p>
-          <input type="text" name="nome_denunciante" placeholder="Digitar nome"
-                 class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500" />
         </div>
 
         <div>
@@ -66,13 +70,13 @@
         </div>
 
         <div>
-          <input type="text" name="endereco" placeholder="Endereço completo" required
+          <input type="text" name="endereco" placeholder="Endereço da denuncia" required
                  class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500" />
         </div>
 
         <div>
           <select name="cidade" required
-                  class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
+                  class="w-full p-3 rounded-lg bg-white/90 text-black font-light placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
             <option value="">Selecione a cidade</option>
             {% for cidade in cidades %}
               <option value="{{ cidade.id }}">{{ cidade.get_nome_display }}</option>
@@ -93,6 +97,13 @@
       </form>
     </div>
   </main>
+
+   <!-- Footer -->
+  <footer class="bg-white border-t border-gray-200 py-6">
+     <div class="container mx-auto max-w-screen-xl px-4 text-center text-sm text-gray-700">
+       Sistema desenvolvido por: <a class="font-semibold text-blue-500" href="https://www.material-tailwind.com" target="_blank">Vision Tools BR</a>.
+     </div>
+  </footer>
 
   <script>
     // Máscara simples para telefone

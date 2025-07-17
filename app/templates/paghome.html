@@ -33,13 +33,13 @@
 
         <!-- Estatísticas -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          <div class="bg-gray-200 text-center rounded-lg py-4">
-            <div class="text-6xl text-blue-gray-900 font-bold">10</div>
-            <div class="text-lg text-red-700 font-bold">Denúncias</div>
+          <div class="bg-gray-100 text-center rounded-lg shadow-md py-4">
+            <div class="text-6xl text-red-900 font-bold">10</div>
+            <div class="text-lg text-red-900 font-bold">Denúncias</div>
           </div>
-          <div class="bg-gray-200 text-center rounded-lg py-4">
-            <div class="text-6xl text-blue-gray-900 font-bold">17</div>
-            <div class="text-lg text-green-700 font-bold">Resolvidos</div>
+          <div class="bg-gray-100 text-center rounded-lg shadow-md py-4">
+            <div class="text-6xl text-green-900 font-bold">17</div>
+            <div class="text-lg text-green-900 font-bold">Resolvidos</div>
           </div>
         </div>
       </section>
@@ -49,21 +49,33 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <form method="GET" action="{% url 'home' %}" class="flex flex-col md:flex-row md:items-center gap-2 md:col-span-2">
             <div class="relative w-full">
-              <select name="cidade" id="cidade" class="block w-full p-3 ps-10 text-sm border rounded bg-gray-100 focus:ring-blue-500">
-                <option value="">Todas as Cidades</option>
+              <select placeholder="Filtre sua cidade" name="cidade" id="cidade" class="py-4 px-6 w-full bg-gray-100 border-transparent rounded-lg shadow-md font-semibold text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                <option value="">Todas as cidades</option>
                 {% for cidade in cidades %}
                 <option value="{{ cidade.nome }}" {% if cidade.nome == cidade_selecionada %}selected{% endif %}>
                   {{ cidade.get_nome_display }}
                 </option>                
                 {% endfor %}
               </select>
-              <div class="absolute left-3 top-1/2 -translate-y-1/2">
-                <!-- Ícone lupa -->
-              </div>
             </div>
-            <button type="submit" class="px-4 py-2 text-blue-500 border border-blue-500 rounded hover:bg-blue-50">Buscar</button>
+            <button type="submit" class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-bold rounded-e-md border shadow-md border-transparent bg-gray-100 text-blue-gray-900 hover:bg-blue-200 focus:outline-hidden focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
+              </svg>
+              Buscar
+            </button>          
           </form>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <label for="hs-checkbox-in-form" class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 ">
+              <input type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-checkbox-in-form">
+              <span class="flex flex-row text-sm text-gray-500 ms-3 dark:text-neutral-400">Status: RESOLVIDO</span>
+            </label>
           
+            <label for="hs-checkbox-checked-in-form" class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 ">
+              <input type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-checkbox-checked-in-form" checked="">
+              <span class="flex flex-row text-sm text-gray-500 ms-3 dark:text-neutral-400">Status: NÃO RESOLVIDO</span>
+            </label>
+          </div> 
           {% if cidade_selecionada %}
             <p class="text-sm text-gray-500">📍 Mostrando denúncias de: {{ cidade_selecionada }}</p>
           {% else %}
@@ -87,13 +99,12 @@
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-white border-t py-6">
+   <!-- Footer -->
+  <footer class="bg-white border-t border-gray-200 py-6">
     <div class="container mx-auto max-w-screen-xl px-4 text-center text-sm text-gray-700">
-      Made with <a class="font-semibold" href="https://www.material-tailwind.com" target="_blank">Material Tailwind</a> by <a class="font-semibold" href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
+      Sistema desenvolvido por: <a class="font-semibold text-blue-500" href="https://www.material-tailwind.com" target="_blank">Vision Tools BR</a>.
     </div>
   </footer>
-
   <!--modals-->
 
   <div id="modal-denuncia" class="fixed inset-0 z-50 p-4 hidden flex items-center justify-center  shadow-black-500/20 backdrop-blur-sm bg-black/30">
