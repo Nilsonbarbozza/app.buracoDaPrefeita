@@ -35,12 +35,12 @@
         <!-- Estatísticas -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           <div class="bg-gray-100 text-center rounded-lg shadow-md py-4">
-            <div class="text-6xl text-red-900 font-bold">10</div>
-            <div class="font-raleway text-lg text-red-900 font-bold">Denúncias</div>
+            <div class="text-6xl text-slate-500 font-bold font-raleway subpixel-antialiased tracking-tight">10</div>
+            <div class="font-raleway text-lg text-slate-400 font-bold font-raleway subpixel-antialiased tracking-tight">Denúncias</div>
           </div>
           <div class="bg-gray-100 text-center rounded-lg shadow-md py-4">
-            <div class="text-6xl text-green-900 font-bold">17</div>
-            <div class="text-lg text-green-900 font-bold">Resolvidos</div>
+            <div class="text-6xl text-slate-500 font-bold font-raleway subpixel-antialiased tracking-tight">17</div>
+            <div class="text-lg text-slate-400 font-bold font-raleway subpixel-antialiased tracking-tight">Resolvidos</div>
           </div>
         </div>
       </section>
@@ -50,7 +50,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <form method="GET" action="{% url 'home' %}" class="flex flex-col md:flex-row md:items-center gap-2 md:col-span-2">
             <div class="relative w-full">
-              <select placeholder="Filtre sua cidade" name="cidade" id="cidade" class="py-4 px-6 w-full bg-gray-100 border-transparent rounded-lg shadow-md font-semibold text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+              <select placeholder="Filtre sua cidade" name="cidade" id="cidade" class="py-4 px-6 w-full bg-gray-100 border-transparent rounded-lg shadow-md font-bold font-raleway subpixel-antialiased tracking-tight text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
                 <option value="">Todas as cidades</option>
                 {% for cidade in cidades %}
                 <option value="{{ cidade.nome }}" {% if cidade.nome == cidade_selecionada %}selected{% endif %}>
@@ -59,7 +59,7 @@
                 {% endfor %}
               </select>
             </div>
-            <button type="submit" class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-bold rounded-e-md border shadow-md border-transparent bg-gray-100 text-blue-gray-900 hover:bg-blue-200 focus:outline-hidden focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none">
+            <button type="submit" class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-bold font-raleway subpixel-antialiased tracking-tight rounded-e-md border shadow-md border-transparent bg-gray-100 text-blue-gray-900 hover:bg-blue-200 focus:outline-hidden focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                 <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
               </svg>
@@ -77,15 +77,27 @@
               <span class="flex flex-row text-sm text-gray-500 ms-3 dark:text-neutral-400">Status: NÃO RESOLVIDO</span>
             </label>
           </div> 
-          {% if cidade_selecionada %}
-            <p class="text-sm text-gray-500">📍 Mostrando denúncias de: {{ cidade_selecionada }}</p>
-          {% else %}
-            <p class="text-sm text-gray-500">📍 Todas as cidades</p>
-          {% endif %}
+
         </div>
       </section>
       
-      
+      <section class="mb-6 px-4 space-y-6">
+        {% if cidade_selecionada %}
+          <div class="flex flex-row gap-1 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-700">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
+            </svg>
+            <p class="text-base sm:text-xl font-bold font-raleway subpixel-antialiased tracking-tight text-gray-700">Mostrando denúncias de: {{ cidade_selecionada }}</p>
+          </div>
+        {% else %}
+        <div class="flex flex-row gap-1 items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-700">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.242 5.992h12m-12 6.003H20.24m-12 5.999h12M4.117 7.495v-3.75H2.99m1.125 3.75H2.99m1.125 0H5.24m-1.92 2.577a1.125 1.125 0 1 1 1.591 1.59l-1.83 1.83h2.16M2.99 15.745h1.125a1.125 1.125 0 0 1 0 2.25H3.74m0-.002h.375a1.125 1.125 0 0 1 0 2.25H2.99" />
+          </svg>
+          <p class="text-base sm:text-xl font-bold font-raleway subpixel-antialiased tracking-tight text-gray-700">Todas as denuncias</p>
+        </div>
+        {% endif %}
+      </section>
 
       <!-- Cards das Denúncias -->
       <section id="denuncias-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 sm:gap-6">    
