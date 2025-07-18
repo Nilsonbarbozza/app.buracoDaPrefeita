@@ -9,6 +9,22 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def home(request):
     cidade_filtro = request.GET.get("cidade")
+    cidade_selecionada = request.GET.get("cidade")
+    filtro_resolvido = request.GET.get("resolvido") == "true"
+    
+    
+
+    if cidade_selecionada:
+        denuncias = Denuncia.objects.filter(cidade__nome=cidade_selecionada)
+    else:
+        denuncias = Denuncia.objects.all()
+
+    if filtro_resolvido:
+        denuncias = denuncias.filter(situacao='RESOLVIDO')
+
+    total_denuncias = denuncias.count()
+    cidades = CidadeDenuncia.objects.filter(ativo=True)    
+
     page = request.GET.get("page") or 1
 
     try:
@@ -17,10 +33,7 @@ def home(request):
         page = 1
 
     # Aplica filtro se cidade for informada
-    if cidade_filtro:
-        denuncias_filtradas = Denuncia.objects.filter(cidade__nome=cidade_filtro, ativo=True).order_by('-data_registro')
-    else:
-        denuncias_filtradas = Denuncia.objects.filter(ativo=True).order_by('-data_registro')
+    denuncias_filtradas = denuncias.filter(ativo=True).order_by('-data_registro')
 
     paginator = Paginator(denuncias_filtradas, 7)
 
@@ -45,7 +58,9 @@ def home(request):
     context = {
         "denuncias": denuncias_paginadas,  # agora sim o template usa só os paginados corretos
         "cidades": cidades,
-        "cidade_selecionada": cidade_filtro
+        "cidade_selecionada": cidade_filtro,
+        "total_denuncias": total_denuncias,
+        "filtro_resolvido": filtro_resolvido,
     }
 
     # Opcional: log para debug
@@ -53,8 +68,6 @@ def home(request):
         print(f"Denúncia: {denuncia.endereco}, Cidade: {denuncia.cidade.nome}")
 
     return render(request, "paghome.html", context)
-
-
 
 
 # views.py
