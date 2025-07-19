@@ -23,7 +23,8 @@ def home(request):
         denuncias = denuncias.filter(situacao='RESOLVIDO')
 
     total_denuncias = denuncias.count()
-    cidades = CidadeDenuncia.objects.filter(ativo=True)    
+    cidades = CidadeDenuncia.objects.filter(ativo=True)   
+    denuncias_resolvidas = denuncias.filter(situacao='RESOLVIDO').count()
 
     page = request.GET.get("page") or 1
 
@@ -61,6 +62,7 @@ def home(request):
         "cidade_selecionada": cidade_filtro,
         "total_denuncias": total_denuncias,
         "filtro_resolvido": filtro_resolvido,
+        "denuncias_resolvidas": denuncias_resolvidas,
     }
 
     # Opcional: log para debug

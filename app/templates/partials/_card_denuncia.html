@@ -7,8 +7,9 @@
                 <img class="h-[16rem] w-full object-cover" src="{{ denuncia.foto.url }}" alt="Patho-denuncia" />
                 <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-red/60"></div>
                 
-                <button type="button" class="absolute top-4 right-4 flex h-8 w-14 items-center justify-center gap-1 rounded-lg bg-red-600 px-2 text-sm font-bold uppercasefont-bold font-raleway subpixel-antialiased tracking-tight text-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-2.625 6c-.54 0-.828.419-.936.634a1.96 1.96 0 0 0-.189.866c0 .298.059.605.189.866.108.215.395.634.936.634.54 0 .828-.419.936-.634.13-.26.189-.568.189-.866 0-.298-.059-.605-.189-.866-.108-.215-.395-.634-.936-.634Zm4.314.634c.108-.215.395-.634.936-.634.54 0 .828.419.936.634.13.26.189.568.189.866 0 .298-.059.605-.189.866-.108.215-.395.634-.936.634-.54 0-.828-.419-.936-.634a1.96 1.96 0 0 1-.189-.866c0-.298.059-.605.189-.866Zm-4.34 7.964a.75.75 0 0 1-1.061-1.06 5.236 5.236 0 0 1 3.73-1.538 5.236 5.236 0 0 1 3.695 1.538.75.75 0 1 1-1.061 1.06 3.736 3.736 0 0 0-2.639-1.098 3.736 3.736 0 0 0-2.664 1.098Z" clip-rule="evenodd"/></svg>
+                <button type="button" class="absolute top-4 right-4 flex h-8 w-14 items-center gap-1 text-sm rounded-lg font-bold uppercasefont-bold font-raleway subpixel-antialiased tracking-tight bg-red-600 border-l-4 border-red-500 text-white p-3  transition duration-300 ease-in-out hover:bg-red-200 dark:hover:bg-red-800 transform hover:scale-105">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-2.625 6c-.54 0-.828.419-.936.634a1.96 1.96 0 0 0-.189.866c0 .298.059.605.189.866.108.215.395.634.936.634.54 0 .828-.419.936-.634.13-.26.189-.568.189-.866 0-.298-.059-.605-.189-.866-.108-.215-.395-.634-.936-.634Zm4.314.634c.108-.215.395-.634.936-.634.54 0 .828.419.936.634.13.26.189.568.189.866 0 .298-.059.605-.189.866-.108.215-.395.634-.936.634-.54 0-.828-.419-.936-.634a1.96 1.96 0 0 1-.189-.866c0-.298.059-.605.189-.866Zm-4.34 7.964a.75.75 0 0 1-1.061-1.06 5.236 5.236 0 0 1 3.73-1.538 5.236 5.236 0 0 1 3.695 1.538.75.75 0 1 1-1.061 1.06 3.736 3.736 0 0 0-2.639-1.098 3.736 3.736 0 0 0-2.664 1.098Z" clip-rule="evenodd"/>
+                  </svg>
                   {{ denuncia.denuncias_detalhadas.count }}
                 </button>
                     <!-- SELO e GRADIENTE verde se resolvido -->
@@ -75,26 +76,26 @@
                   <button type="button" class="flex justify-center gap-1 items-center w-full sm:w-auto font-bold font-raleway subpixel-antialiased tracking-tight bg-gray-200 border-l-4 border-gray-300 text-blue-gray-900 p-3 rounded-lg transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-300 transform hover:scale-105">
                     <svg class="h-6 w-6 text-blue-gray-900" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 4.5a3 3 0 1 1 .825 2.066l-8.421 4.679a3.002 3.002 0 0 1 0 1.51l8.421 4.679a3 3 0 1 1-.729 1.31l-8.421-4.678a3 3 0 1 1 0-4.132l8.421-4.679a3 3 0 0 1-.096-.755Z" /></svg>
                     Compartilhar
-                </button>
+                  </button>
             
-                <button type="button" class="flex justify-center gap-1 items-center w-full sm:w-auto font-bold font-raleway subpixel-antialiased tracking-tight bg-red-600 border-l-4 border-red-500 text-white p-3 rounded-lg transition duration-300 ease-in-out hover:bg-red-200 dark:hover:bg-red-800 transform hover:scale-105" onclick="abrirModal({{ denuncia.id }})">
-                  <svg class="h-6 w-6 text-gray-100" fill="currentColor" viewBox="0 0 24 24"> <path d="M15.73 5.5h1.035A7.465 7.465 0 0 1 18 9.625a7.465 7.465 0 0 1-1.235 4.125h-.148c-.806 0-1.534.446-2.031 1.08a9.04 9.04 0 0 1-2.861 2.4c-.723.384-1.35.956-1.653 1.715a4.499 4.499 0 0 0-.322 1.672v.633A.75.75 0 0 1 9 22a2.25 2.25 0 0 1-2.25-2.25c0-1.152.26-2.243.723-3.218.266-.558-.107-1.282-.725-1.282H3.622c-1.026 0-1.945-.694-2.054-1.715A12.137 12.137 0 0 1 1.5 12.25c0-2.848.992-5.464 2.649-7.521C4.537 4.247 5.136 4 5.754 4H9.77a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23ZM21.669 14.023c.536-1.362.831-2.845.831-4.398 0-1.22-.182-2.398-.52-3.507-.26-.85-1.084-1.368-1.973-1.368H19.1c-.445 0-.72.498-.523.898.591 1.2.924 2.55.924 3.977a8.958 8.958 0 0 1-1.302 4.666c-.245.403.028.959.5.959h1.053c.832 0 1.612-.453 1.918-1.227Z" clip-rule="evenodd"/>
-                    </svg>
-                    Denunciar
-                </button>
+                  <button type="button" class="flex justify-center gap-1 items-center w-full sm:w-auto font-bold font-raleway subpixel-antialiased tracking-tight bg-red-600 border-l-4 border-red-500 text-white p-3 rounded-lg transition duration-300 ease-in-out hover:bg-red-200 dark:hover:bg-red-800 transform hover:scale-105" onclick="abrirModal({{ denuncia.id }})">
+                    <svg class="h-6 w-6 text-gray-100" fill="currentColor" viewBox="0 0 24 24"> <path d="M15.73 5.5h1.035A7.465 7.465 0 0 1 18 9.625a7.465 7.465 0 0 1-1.235 4.125h-.148c-.806 0-1.534.446-2.031 1.08a9.04 9.04 0 0 1-2.861 2.4c-.723.384-1.35.956-1.653 1.715a4.499 4.499 0 0 0-.322 1.672v.633A.75.75 0 0 1 9 22a2.25 2.25 0 0 1-2.25-2.25c0-1.152.26-2.243.723-3.218.266-.558-.107-1.282-.725-1.282H3.622c-1.026 0-1.945-.694-2.054-1.715A12.137 12.137 0 0 1 1.5 12.25c0-2.848.992-5.464 2.649-7.521C4.537 4.247 5.136 4 5.754 4H9.77a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23ZM21.669 14.023c.536-1.362.831-2.845.831-4.398 0-1.22-.182-2.398-.52-3.507-.26-.85-1.084-1.368-1.973-1.368H19.1c-.445 0-.72.498-.523.898.591 1.2.924 2.55.924 3.977a8.958 8.958 0 0 1-1.302 4.666c-.245.403.028.959.5.959h1.053c.832 0 1.612-.453 1.918-1.227Z" clip-rule="evenodd"/>
+                      </svg>
+                      Denunciar
+                  </button>
                 </div>
                 {% else %}
                 <div class="flex flex-row sm:flex-row sm:gap-1 gap-5 justify-between px-4 py-3">
                   <button type="" class="flex justify-center gap-1 items-center w-full sm:w-auto font-bold font-raleway subpixel-antialiased tracking-tight bg-gray-100 border-l-4 border-gray-100 text-gray-300 p-3 rounded-lg transition duration-300 ease-in-out ">
                     <svg class="h-6 w-6 text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 4.5a3 3 0 1 1 .825 2.066l-8.421 4.679a3.002 3.002 0 0 1 0 1.51l8.421 4.679a3 3 0 1 1-.729 1.31l-8.421-4.678a3 3 0 1 1 0-4.132l8.421-4.679a3 3 0 0 1-.096-.755Z" /></svg>
                     Compartilhar
-                </button>
+                  </button>
             
-                <button type="" class="flex justify-center gap-1 items-center w-full sm:w-auto font-bold font-raleway subpixel-antialiased tracking-tight bg-red-200 border-l-4 border-red-200 text-white p-3 rounded-lg transition duration-300 ease-in-out">
-                  <svg class="h-6 w-6 text-gray-100" fill="currentColor" viewBox="0 0 24 24"> <path d="M15.73 5.5h1.035A7.465 7.465 0 0 1 18 9.625a7.465 7.465 0 0 1-1.235 4.125h-.148c-.806 0-1.534.446-2.031 1.08a9.04 9.04 0 0 1-2.861 2.4c-.723.384-1.35.956-1.653 1.715a4.499 4.499 0 0 0-.322 1.672v.633A.75.75 0 0 1 9 22a2.25 2.25 0 0 1-2.25-2.25c0-1.152.26-2.243.723-3.218.266-.558-.107-1.282-.725-1.282H3.622c-1.026 0-1.945-.694-2.054-1.715A12.137 12.137 0 0 1 1.5 12.25c0-2.848.992-5.464 2.649-7.521C4.537 4.247 5.136 4 5.754 4H9.77a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23ZM21.669 14.023c.536-1.362.831-2.845.831-4.398 0-1.22-.182-2.398-.52-3.507-.26-.85-1.084-1.368-1.973-1.368H19.1c-.445 0-.72.498-.523.898.591 1.2.924 2.55.924 3.977a8.958 8.958 0 0 1-1.302 4.666c-.245.403.028.959.5.959h1.053c.832 0 1.612-.453 1.918-1.227Z" clip-rule="evenodd"/>
-                    </svg>
-                    Denunciar
-                </button>
+                  <button type="" class="flex justify-center gap-1 items-center w-full sm:w-auto font-bold font-raleway subpixel-antialiased tracking-tight bg-red-200 border-l-4 border-red-200 text-white p-3 rounded-lg transition duration-300 ease-in-out">
+                    <svg class="h-6 w-6 text-gray-100" fill="currentColor" viewBox="0 0 24 24"> <path d="M15.73 5.5h1.035A7.465 7.465 0 0 1 18 9.625a7.465 7.465 0 0 1-1.235 4.125h-.148c-.806 0-1.534.446-2.031 1.08a9.04 9.04 0 0 1-2.861 2.4c-.723.384-1.35.956-1.653 1.715a4.499 4.499 0 0 0-.322 1.672v.633A.75.75 0 0 1 9 22a2.25 2.25 0 0 1-2.25-2.25c0-1.152.26-2.243.723-3.218.266-.558-.107-1.282-.725-1.282H3.622c-1.026 0-1.945-.694-2.054-1.715A12.137 12.137 0 0 1 1.5 12.25c0-2.848.992-5.464 2.649-7.521C4.537 4.247 5.136 4 5.754 4H9.77a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23ZM21.669 14.023c.536-1.362.831-2.845.831-4.398 0-1.22-.182-2.398-.52-3.507-.26-.85-1.084-1.368-1.973-1.368H19.1c-.445 0-.72.498-.523.898.591 1.2.924 2.55.924 3.977a8.958 8.958 0 0 1-1.302 4.666c-.245.403.028.959.5.959h1.053c.832 0 1.612-.453 1.918-1.227Z" clip-rule="evenodd"/>
+                      </svg>
+                      Denunciar
+                  </button>
                 </div>
                 {% endif %}
             </div>

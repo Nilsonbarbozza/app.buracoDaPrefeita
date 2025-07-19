@@ -12,15 +12,29 @@
 <body class="bg-gray-100">
 
   <!-- Header (NAV) -->
-  <header class="bg-gray-900">
+  <header class="bg-white border-t-gray-300 ">
     <div class="container mx-auto max-w-screen-xl px-4 py-4 flex justify-between items-center">
       <a href="/" class="flex items-center space-x-3">
-        <img src="https://flowbite.com/docs/images/logo.svg" alt="Logo" class="h-8">
-        <span class="text-white text-2xl font-semibold">Buraco da Prefeita</span>
+        <img src="https://www.mactools.pro/_next/image?url=https%3A%2F%2Fi.ibb.co%2FznYhJxL%2Flogo-no-writing.png&w=128&q=75" alt="Logo" class="h-16 w-16">
+        <span class="text-black text-4xl font-semibold"></span>
       </a>
-      <div class="space-x-4">
-        <a href="tel:5541251234" class="text-white text-sm hover:underline">Contato</a>
-        <a href="{% url 'enviar_denuncia' %}" class="text-white font-bold hover:underline">Denunciar</a>
+      <div class="flex flex-row sm:flex-row sm:gap-2.5 gap-1 justify-between px-4 py-3">
+        <a href="{% url 'enviar_denuncia' %}" class="text-blue-gray-900 text-lg ">
+          <button type="button" class="flex justify-center gap-1 items-center w-full sm:w-auto font-bold font-raleway subpixel-antialiased tracking-tight bg-white-100  p-3 rounded-lg transition duration-300 ease-in-out hover:bg-white-100  transform hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 text-blue-gray-900">
+              <path fill-rule="evenodd" d="M12 2.25c-2.429 0-4.817.178-7.152.521C2.87 3.061 1.5 4.795 1.5 6.741v6.018c0 1.946 1.37 3.68 3.348 3.97.877.129 1.761.234 2.652.316V21a.75.75 0 0 0 1.28.53l4.184-4.183a.39.39 0 0 1 .266-.112c2.006-.05 3.982-.22 5.922-.506 1.978-.29 3.348-2.023 3.348-3.97V6.741c0-1.947-1.37-3.68-3.348-3.97A49.145 49.145 0 0 0 12 2.25ZM8.25 8.625a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Zm2.625 1.125a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875-1.125a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Z" clip-rule="evenodd" />
+            </svg>            
+            Contato
+          </button>
+        </a>      
+        <a href="{% url 'enviar_denuncia' %}" class="text-gray-500 text-lg">
+          <button type="button" class="flex justify-center gap-1 items-center w-full sm:w-auto font-bold font-raleway subpixel-antialiased tracking-tight bg-gray-200 border-l-4 border-gray-400 text-blue-gray-900 p-3 rounded-lg transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-300 transform hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 text-gray-500">
+              <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
+            </svg>
+            Denunciar
+          </button>
+        </a>
       </div>
     </div>
   </header>
@@ -39,7 +53,7 @@
             <div class="font-raleway text-lg text-slate-400 font-bold font-raleway subpixel-antialiased tracking-tight">Denúncias</div>
           </div>
           <div class="bg-gray-100 text-center rounded-lg shadow-md py-4">
-            <div class="text-6xl text-slate-500 font-bold font-raleway subpixel-antialiased tracking-tight">17</div>
+            <div class="text-6xl text-slate-500 font-bold font-raleway subpixel-antialiased tracking-tight">{{ denuncias_resolvidas }}</div>
             <div class="text-lg text-slate-400 font-bold font-raleway subpixel-antialiased tracking-tight">Resolvidos</div>
           </div>
         </div>
@@ -112,18 +126,59 @@
       
       <!-- Loader invisível no fim da página -->
       <div id="loader" class="w-full text-center py-4">
-        <p class="text-gray-400 text-sm">Carregando mais denúncias...</p>
+        <p class="text-gray-400 flex flex-row justify-center items-center gap-1 text-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-blue-500 animate-spin">
+          <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
+        </svg>
+          Carregando mais denúncias...</p>
       </div>
       
     </div>
   </main>
 
    <!-- Footer -->
-  <footer class="bg-white border-t border-gray-200 py-6">
-    <div class="container mx-auto max-w-screen-xl px-4 text-center text-sm text-gray-700">
-      Sistema desenvolvido por: <a class="font-semibold text-blue-500" href="https://www.material-tailwind.com" target="_blank">Vision Tools BR</a>.
+  <footer class="text-center mt-auto w-full bg-white border-t border-gray-200 py-6">
+    <div>
+      <a href="/" class="flex flex-row justify-center items-center">
+        <img src="https://www.mactools.pro/_next/image?url=https%3A%2F%2Fi.ibb.co%2FznYhJxL%2Flogo-no-writing.png&w=128&q=75" alt="Logo" class="h-12 w-12">
+        <span class="text-black text-4xl font-semibold"></span>
+      </a>
     </div>
+    <!-- End Col -->
+
+    <div class="mt-3">
+      <p class="text-gray-500">Desenvolvido por <a class="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">Vision Tools BR</a></p>
+      <p class="text-gray-500">
+        © 2025 Developed.
+      </p>
+    </div>
+
+    <!-- Social Brands -->
+    <!-- <div class="mt-3 space-x-2">
+      <a class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-500 hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" href="#">
+        <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
+        </svg>
+      </a>
+      <a class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-500 hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" href="#">
+        <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+        </svg>
+      </a>
+      <a class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-500 hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" href="#">
+        <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+      </a>
+      <a class="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-500 hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" href="#">
+        <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M3.362 10.11c0 .926-.756 1.681-1.681 1.681S0 11.036 0 10.111C0 9.186.756 8.43 1.68 8.43h1.682v1.68zm.846 0c0-.924.756-1.68 1.681-1.68s1.681.756 1.681 1.68v4.21c0 .924-.756 1.68-1.68 1.68a1.685 1.685 0 0 1-1.682-1.68v-4.21zM5.89 3.362c-.926 0-1.682-.756-1.682-1.681S4.964 0 5.89 0s1.68.756 1.68 1.68v1.682H5.89zm0 .846c.924 0 1.68.756 1.68 1.681S6.814 7.57 5.89 7.57H1.68C.757 7.57 0 6.814 0 5.89c0-.926.756-1.682 1.68-1.682h4.21zm6.749 1.682c0-.926.755-1.682 1.68-1.682.925 0 1.681.756 1.681 1.681s-.756 1.681-1.68 1.681h-1.681V5.89zm-.848 0c0 .924-.755 1.68-1.68 1.68A1.685 1.685 0 0 1 8.43 5.89V1.68C8.43.757 9.186 0 10.11 0c.926 0 1.681.756 1.681 1.68v4.21zm-1.681 6.748c.926 0 1.682.756 1.682 1.681S11.036 16 10.11 16s-1.681-.756-1.681-1.68v-1.682h1.68zm0-.847c-.924 0-1.68-.755-1.68-1.68 0-.925.756-1.681 1.68-1.681h4.21c.924 0 1.68.756 1.68 1.68 0 .926-.756 1.681-1.68 1.681h-4.21z"/>
+        </svg>
+      </a>
+    </div>-->
+
   </footer>
+  
   <!--modals-->
 
   <div id="modal-denuncia" class="fixed inset-0 z-50 p-4 hidden flex items-center justify-center  shadow-black-500/20 backdrop-blur-sm bg-black/30">
@@ -168,9 +223,11 @@
           </select>
         </div>
         
-        <button type="submit"
-                class="w-full cursor-pointer bg-green-700 hover:bg-green-600 text-white font-semibold border-l-4 border-green-500 text-white p-3 rounded-lg transition duration-300 ease-in-out hover:bg-green-800 dark:hover:bg-green-800 transform hover:scale-105">
-          Enviar
+        <button type="submit" class="flex justify-center gap-1 items-center w-full sm:w-full font-bold font-raleway subpixel-antialiased tracking-tight bg-green-500 border-l-4 border-green-700 text-gray-100 p-3 rounded-lg transition duration-300 ease-in-out hover:bg-green-600 transform hover:scale-105">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 text-gray-100">
+            <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
+          </svg>
+          Enviar denuncia
         </button>
         <p class="text-xs py-4 text-blue-gray-900 text-center mb-4">
             🔒 Seus dados estão protegidos. Esta denúncia é <strong>anônima</strong> e garantida pela Lei do Marco Civil da Internet.
