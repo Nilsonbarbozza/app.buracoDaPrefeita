@@ -45,6 +45,7 @@ class Denuncia(models.Model):
     ativo = models.BooleanField(default=False)  # visível só após aprovação
     cidade = models.ForeignKey('CidadeDenuncia', on_delete=models.CASCADE)  # cidade filtrável
     contagem_denuncias = models.PositiveIntegerField(default=1)
+    resolvido = models.DateTimeField(null=True, blank=True)
 
     def nome_visivel(self):
         return self.nome_denunciante if self.nome_denunciante else "Anônimo"

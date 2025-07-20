@@ -7,6 +7,7 @@
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 <body class="bg-gray-100">
@@ -236,6 +237,38 @@
     </div>
   </div>
 
+<!-- Modal de Compartilhamento -->
+<div id="modalCompartilhar" class="fixed inset-0 z-50 p-4 hidden flex items-center justify-center shadow-black-500/20 backdrop-blur-sm bg-black/30">
+  <div class="bg-gray-100 p-6 rounded-xl w-full max-w-md text-center shadow-lg relative">
+    <h2 class="text-xl font-bold mb-4 text-blue-gray-900 ">Compartilhar esta página</h2>
+
+    <div class="flex justify-center gap-4 mb-4">
+      <a id="linkWhatsApp" target="_blank" class="text-green-600 hover:scale-110 transition transform">
+        <i class="fab fa-whatsapp fa-2x"></i>
+      </a>
+      <a id="linkFacebook" target="_blank" class="text-blue-600 hover:scale-110 transition transform">
+        <i class="fab fa-facebook fa-2x"></i>
+      </a>
+      <a id="linkTwitter" target="_blank" class="text-blue-400 hover:scale-110 transition transform">
+        <i class="fab fa-twitter fa-2x"></i>
+      </a>
+      <button onclick="copiarLink()" class="text-gray-700 hover:scale-110 transition transform">
+        <i class="fas fa-link fa-2x"></i>
+      </button>
+    </div>
+
+    <div class="flex flex-row justify-center">
+      <button onclick="fecharModalCompartilhar()" class="flex flex-row justify-between mt-4 px-4 py-2 font-bold font-raleway subpixel-antialiased tracking-tight bg-gray-300 border-l-4 border-gray-500 text-blue-gray-900 p-3 rounded-lg transition duration-300 ease-in-out ">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-blue-gray-900">
+          <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+        </svg>      
+        Fechar
+      </button>
+    </div>
+  </div>
+</div>
+
+
   <script>
     let page = 2;
     const loader = document.getElementById('loader');
@@ -369,5 +402,25 @@
         });
     </script>
 
+    <script>
+      function abrirModalCompartilhar() {
+        const url = window.location.href;
+        document.getElementById('linkWhatsApp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(url)}`;
+        document.getElementById('linkFacebook').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        document.getElementById('linkTwitter').href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
+        document.getElementById('modalCompartilhar').classList.remove('hidden');
+      }
+    
+      function fecharModalCompartilhar() {
+        document.getElementById('modalCompartilhar').classList.add('hidden');
+      }
+    
+      function copiarLink() {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          alert("Link copiado para a área de transferência!");
+        });
+      }
+    </script>
+    
 </body>
 </html>

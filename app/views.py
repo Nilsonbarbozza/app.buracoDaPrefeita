@@ -63,6 +63,7 @@ def home(request):
         "total_denuncias": total_denuncias,
         "filtro_resolvido": filtro_resolvido,
         "denuncias_resolvidas": denuncias_resolvidas,
+        'request': request,
     }
 
     # Opcional: log para debug
