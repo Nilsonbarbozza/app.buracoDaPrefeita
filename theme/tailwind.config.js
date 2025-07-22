@@ -11,6 +11,9 @@ module.exports = {
           raleway: ['Raleway', 'sans-serif'],
           opensans: ['Open Sans', 'sans-serif'],
         },
+        colors:{
+          'black-nav': '#111625'
+        },
       },
     },
     plugins: [],
