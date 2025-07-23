@@ -73,7 +73,7 @@
                 <!-- Botões --> 
                 {% if denuncia.situacao == 'NAO_RESOLVIDO' %}
                 <div class="flex flex-row mt-6 sm:flex-row sm:gap-1 gap-5 justify-between px-4 py-3">
-                  <button onclick="abrirModalCompartilhar()" type="button" class="flex justify-center gap-1 items-center w-full sm:w-auto font-bold font-raleway subpixel-antialiased tracking-tight bg-gray-200 border-l-4 border-gray-300 text-blue-gray-900 p-3 rounded-lg transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-300 transform hover:scale-105">
+                  <button onclick="abrirModalCompartilhar()" type="button" class="flex justify-center gap-1 items-center w-full sm:w-auto font-bold font-raleway subpixel-antialiased tracking-tight bg-gray-200 border-l-4 border-gray-300 text-gray-600 p-3 rounded-lg transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-300 transform hover:scale-105">
                     <svg class="h-6 w-6 text-blue-gray-900" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 4.5a3 3 0 1 1 .825 2.066l-8.421 4.679a3.002 3.002 0 0 1 0 1.51l8.421 4.679a3 3 0 1 1-.729 1.31l-8.421-4.678a3 3 0 1 1 0-4.132l8.421-4.679a3 3 0 0 1-.096-.755Z" /></svg>
                     Compartilhar
                   </button>
@@ -102,17 +102,27 @@
             {% if forloop.counter|divisibleby:5 %}
               <!-- Card de Anúncio -->
               <div class="relative flex w-full max-w-[26rem] min-w-[22rem] flex-col rounded-xl bg-gray-100 text-gray-700 shadow-lg">
-                <div class="relative mx-4 mt-4 overflow-hidden rounded-xl">
-                <a target="_blank" href="https://www.amazon.com.br/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=livelo-20&ascsubtag=1861aceae1c243f489a536817d72f41d">
-                  <div class="h-[16rem] w-full flex items-center justify-center bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300">
-                    <img class=" h-[16rem] w-full object-overflow" src="https://mir-s3-cdn-cf.behance.net/projects/404/513919176872609.Y3JvcCwxNjUxLDEyOTIsMzE4LDA.png"></img>
+                <div class="relative mx-4 mt-4 overflow-hidden rounded-xl h-[16rem]">
+                  <div class="anuncio-slider h-full w-full relative">
+                    <!-- Anúncio 1 -->
+                    <a target="_blank" href="https://www.amazon.com.br/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=livelo-20&ascsubtag=1861aceae1c243f489a536817d72f41d" class="slide absolute top-0 left-0 w-full h-full transition-opacity duration-1000 opacity-100">
+                      <div class="h-full w-full flex items-center justify-center bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300">
+                        <img class="h-full w-full object-cover" src="https://mir-s3-cdn-cf.behance.net/projects/404/513919176872609.Y3JvcCwxNjUxLDEyOTIsMzE4LDA.png" alt="Amazon Prime">
+                      </div>
+                    </a>
+                    <!-- Anúncio 2 -->
+                    <a target="_blank" href="https://www.magazinevoce.com.br/magazinedigitaltech/" class="slide absolute top-0 left-0 w-full h-full transition-opacity duration-1000 opacity-0">
+                      <div class="h-full w-full flex items-center justify-center bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300">
+                        <img class="h-full w-full object-cover" src="https://http2.mlstatic.com/D_NQ_NP_2X_607949-MLB50398373411_062022-F.webp" alt="Magazine Luiza">
+                      </div>
+                    </a>
+                    <!-- Anúncio 3 -->
+                    <a target="_blank" href="https://shope.ee/9pJ6UkfJ4K" class="slide absolute top-0 left-0 w-full h-full transition-opacity duration-1000 opacity-0">
+                      <div class="h-full w-full flex items-center justify-center bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300">
+                        <img class="h-full w-full object-cover" src="https://img.freepik.com/vetores-premium/banner-de-pagina-de-destino-da-promocao-de-venda-da-loja-online-com-ilustracao-do-design-da-loja_100456-11041.jpg" alt="Shopee Promo">
+                      </div>
+                    </a>
                   </div>
-                </a>
-                </div>
-                <div class="flex justify-end px-4 pb-4">
-                  <button onclick="this.closest('div').remove()" class="text-xs text-gray-400 hover:text-gray-600 transition">
-                    Fechar anúncio ✕
-                  </button>
                 </div>
               </div>
             {% endif %}
