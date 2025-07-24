@@ -1,5 +1,6 @@
 
       <!-- Cards das Denúncias -->
+      {% if denuncias %}
         {% for denuncia in denuncias %}
             <div class="relative flex w-full max-w-[26rem] min-w-[22rem] flex-col rounded-xl bg-white text-gray-700 shadow-xl">
                 <!-- Imagem -->
@@ -127,4 +128,24 @@
               </div>
             {% endif %}
         {% endfor %}
-
+      {% else %}
+      <div class="relative flex w-full max-w-[26rem] min-w-[22rem] flex-col rounded-xl bg-white text-gray-600 shadow-xl">
+        <div class="flex flex-col items-center justify-center text-center m-10 text-gray-600 py-10">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-24 w-24 text-gray-300">
+            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
+          </svg>
+          <p class="text-lg text-gray-300 font-semibold">Ainda não há denúncias feitas para esta cidade.</p>
+        </div>
+        <div class="flex flex-col items-center m-10 justify-center">
+        <a href="{% url 'enviar_denuncia' %}" class="text-gray-600 text-base">
+          <button type="button" class="flex justify-center gap-1 items-center w-full sm:w-auto font-bold font-raleway subpixel-antialiased tracking-tight bg-gray-200 border-l-4 border-gray-300 text-blue-gray-900 p-3 rounded-lg transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-300 transform hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 text-gray-600">
+              <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
+            </svg>
+            Denunciar
+          </button>
+        </a>
+        </div>
+        </div>
+      </div>
+      {% endif %}

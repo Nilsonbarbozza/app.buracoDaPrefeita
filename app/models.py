@@ -7,6 +7,7 @@ class CidadeDenuncia(models.Model):
     CIDADES_DISPONIVEIS = [
         ('BARAUNA', 'Baraúna'),
         ('MOSSORO', 'Mossóro'),
+        ('NATAL', 'Natal'),
         # Adicione outras conforme necessário
     ]
 
