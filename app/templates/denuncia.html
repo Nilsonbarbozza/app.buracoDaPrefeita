@@ -25,7 +25,7 @@
           </button>
         </a>      
         <a href="{% url 'home' %}" class="text-gray-600 text-sm">
-          <button type="button" class="flex justify-center gap-1 items-center h-10 w-full sm:w-full font-bold font-raleway subpixel-antialiased tracking-tight bg-gray-200 border-l-4 border-gray-400 text-blue-gray-900 p-3 rounded-lg transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-300 transform hover:scale-105">
+          <button type="button" class="flex justify-center gap-1 items-center h-10 w-full sm:w-full font-bold font-raleway subpixel-antialiased tracking-tight bg-gray-200 border-l-4 border-gray-300 text-blue-gray-900 p-3 rounded-lg transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-300 transform hover:scale-105">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 text-gray-600">
               <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
               <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
@@ -40,21 +40,21 @@
   <main class=" bg-gray-100">
     <div class="min-h-screen flex justify-center p-6 backdrop-blur-sm bg-gray-100">
       <form method="POST" enctype="multipart/form-data" action="{% url 'enviar_denuncia' %}"
-            class="w-full max-w-2xl bg-gray-100 backdrop-blur-md border border-white/20 shadow-2xl rounded-2xl p-6 space-y-5">
+            class="w-full max-w-2xl bg-gray-100 backdrop-blur-md border border-white/20 shadow-2xl rounded-2xl p-6 space-y-3">
         {% csrf_token %}
 
-        <h2 class="text-2xl font-bold text-gray-900 text-center">Nova Denúncia</h2>
+        <h2 class="text-2xl font-bold text-gray-600 text-center">Nova Denúncia</h2>
 
         <!-- Foto do buraco -->
         <div class="mb-3 items-center">
           
-          <label for="foto" class="cursor-pointer p-12 flex flex-col justify-center bg-white border border-dashed border-blue-300 rounded-xl" data-hs-file-upload-trigger>
+          <label for="foto" class="cursor-pointer p-6 flex flex-col justify-center bg-white border border-dashed border-blue-300 rounded-xl" data-hs-file-upload-trigger>
             <div class="flex flex-col items-center justify-center pt-5 pb-6">
               <svg class="w-12 h-12 mb-1 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
               </svg>
               <p class="mb-2 flex flex-col items-center justify-center text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold text-blue-500">Click para fazer upload</span> ou arraste e solte</p>
-              <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG (MAX. 2MB, 800x400px)</p>
+              <p class="text-xs flex flex-col items-center justify-center text-gray-500 dark:text-gray-400">SVG, PNG, JPG (MAX. 2MB, 800x400px)</p>
           </div>
           </label>
 
@@ -66,11 +66,19 @@
 
         <!-- Outros campos do formulário -->
         <div>
+          <p class="text-sm pt-3 pb-1 text-gray-600">
+            <strong>Dados Pessoais:</strong>
+          </p>
           <input type="text" name="nome_denunciante" placeholder="Digitar nome"
           class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500" />
-          <p class="text-xs py-1 text-gray-900">
-            🔑Esta denúncia pode ser <strong>anônima</strong>. Você pode deixar o campo nome em branco.
-          </p>
+          <div class="flex flex-row items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 text-gray-500">
+              <path fill-rule="evenodd" d="M11.484 2.17a.75.75 0 0 1 1.032 0 11.209 11.209 0 0 0 7.877 3.08.75.75 0 0 1 .722.515 12.74 12.74 0 0 1 .635 3.985c0 5.942-4.064 10.933-9.563 12.348a.749.749 0 0 1-.374 0C6.314 20.683 2.25 15.692 2.25 9.75c0-1.39.223-2.73.635-3.985a.75.75 0 0 1 .722-.516l.143.001c2.996 0 5.718-1.17 7.734-3.08ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75ZM12 15a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75v-.008a.75.75 0 0 0-.75-.75H12Z" clip-rule="evenodd" />
+            </svg>
+            <p class="text-xs py-1">
+              Esta denúncia pode ser <strong>anônima</strong>. Você pode deixar o campo nome em branco.
+            </p>
+          </div>
         </div>
 
         <div>
@@ -84,6 +92,9 @@
         </div>
 
         <div>
+          <p class="text-sm pt-3 pb-1 text-gray-600">
+            <strong>Endereço Completo:</strong>
+          </p>
           <input type="text" name="endereco" placeholder="Endereço da denuncia" required
                  class="w-full p-3 rounded-lg bg-white/90 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500" />
         </div>
@@ -102,7 +113,7 @@
           🔒 Seus dados estão protegidos. Esta denúncia pode ser <strong>anônima</strong> e garantida pela Lei do Marco Civil da Internet.
         </p>
 
-        <div class="pt-2">
+        <div class="pt-3">
           <button type="submit" class="flex justify-center gap-1 items-center w-full sm:w-full font-bold font-raleway subpixel-antialiased tracking-tight bg-green-500 border-l-4 border-green-700 text-gray-100 p-3 rounded-lg transition duration-300 ease-in-out hover:bg-green-600 transform hover:scale-105">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 text-gray-100">
               <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
@@ -192,4 +203,6 @@
     });
   </script>
 </body>
-</html>
+</html><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+  <path fill-rule="evenodd"  clip-rule="evenodd" />
+</svg>
