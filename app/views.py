@@ -142,3 +142,7 @@ def denunciar_existente_modal(request, denuncia_id):
 def checkout(request):
     if request.method == 'GET':
         return render(request, 'checkout.html')
+    
+def contato(request):
+    if request.method =='GET':
+        return render(request, 'contato.html')

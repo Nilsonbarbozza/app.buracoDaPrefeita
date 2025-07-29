@@ -9,5 +9,6 @@ urlpatterns = [
     path('denunciar/<int:denuncia_id>/', views.denunciar_existente, name='denunciar_existente'),
     path('denunciar_modal/<int:denuncia_id>/', views.denunciar_existente_modal, name='denunciar_existente_modal'),
     path('checkout/', views.checkout, name='checkout' ),
+    path('contato/', views.contato, name='contato'),
 
 ]

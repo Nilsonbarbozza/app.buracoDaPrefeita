@@ -20,7 +20,7 @@
         <span class="text-black text-4xl font-semibold"></span>
       </a>
       <div class="flex flex-row sm:flex-row sm:gap-2.5 gap-1 justify-between p-3">
-        <a href="{% url 'enviar_denuncia' %}" class="text-gray-600 text-sm ">
+        <a href="{% url 'contato' %}" class="text-gray-600 text-sm ">
           <button type="button" class="flex justify-center gap-1 items-center h-10 w-full sm:w-full font-bold font-raleway subpixel-antialiased tracking-tight bg-white-100 p-1 rounded-lg transition duration-300 ease-in-out hover:bg-white-100  transform hover:scale-105">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 text-gray-600">
               <path fill-rule="evenodd" d="M12 2.25c-2.429 0-4.817.178-7.152.521C2.87 3.061 1.5 4.795 1.5 6.741v6.018c0 1.946 1.37 3.68 3.348 3.97.877.129 1.761.234 2.652.316V21a.75.75 0 0 0 1.28.53l4.184-4.183a.39.39 0 0 1 .266-.112c2.006-.05 3.982-.22 5.922-.506 1.978-.29 3.348-2.023 3.348-3.97V6.741c0-1.947-1.37-3.68-3.348-3.97A49.145 49.145 0 0 0 12 2.25ZM8.25 8.625a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Zm2.625 1.125a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875-1.125a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Z" clip-rule="evenodd" />
@@ -40,7 +40,7 @@
     </div>
   </header>
 
-  <!-- Main Content -->
+<!-- Main Content -->
   <main class="min-h-screen my-6 sm:mx-36">
     <div class="container mx-auto max-w-screen-xl px-4">
 
@@ -144,7 +144,7 @@
     </div>
   </main>
 
-   <!-- Footer -->
+<!-- Footer -->
   <footer class="text-center mt-auto w-full bg-white border-t-gray-200 py-6">
     <div>
       <a href="/" class="flex flex-row justify-center items-center">
@@ -161,8 +161,7 @@
     </div>
   </footer>
   
-  <!--modals-->
-
+<!--modals Denuncia-->
   <div id="modal-denuncia" class="fixed inset-0 z-50 p-4 hidden flex items-center justify-center  shadow-black-500/20 backdrop-blur-sm bg-black/30">
     <div class="relative w-full max-w-md bg-gray-100 backdrop-blur-md shadow-xl rounded-2xl border border-white/20 p-6">
       
@@ -180,17 +179,17 @@
         
         <div class="mb-3">
           <input type="text" name="nome" placeholder="Digitar nome" required
-                 class="w-full p-2 rounded-lg bg-white text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
+                 class="w-full p-2 rounded-lg bg-white/90 text-gray-900 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
         </div>
   
         <div class="mb-3">
           <input type="email" name="email" placeholder="Digitar E-mail" required
-                 class="w-full p-2 rounded-lg bg-white text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
+                 class="w-full p-2 rounded-lg bg-white/90 text-gray-900 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
         </div>
   
         <div class="mb-4">
           <input type="text" name="telefone" id="telefone" placeholder="(xx) xxxxx-xxxx" required
-                 class="w-full p-2 rounded-lg bg-white text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
+                 class="w-full p-2 rounded-lg bg-white/90 text-gray-900 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
         </div>
 
         <div class="mb-4">
@@ -198,7 +197,7 @@
             Você deseja apoiar o site com uma doação?
           </label>
           <select name="quer_doar" id="quer_doar" required
-                  class="w-full p-2 rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-green-500">
+                  class="w-full p-2 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500">
             <option value="" disabled selected>Escolha uma opção</option>
             <option value="sim">Sim, quero apoiar</option>
             <option value="nao">Não, obrigado</option>
@@ -246,70 +245,70 @@
   </div>
 </div>
 
+<!--Script N0001-->
+  <script>
+    let page = 2;
+    const loader = document.getElementById('loader');
+    const container = document.getElementById('denuncias-container');
 
-<script>
-  let page = 2;
-  const loader = document.getElementById('loader');
-  const container = document.getElementById('denuncias-container');
-
-  const observer = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      loadMore();
-    }
-  }, {
-    rootMargin: '100px',
-  });
-
-  observer.observe(loader);
-
-  function iniciarSlider() {
-    document.querySelectorAll('.anuncio-slider').forEach(slider => {
-      const slides = slider.querySelectorAll('.slide');
-      let currentSlide = 0;
-
-      // Evita duplicar timers
-      if (slider.dataset.active) return;
-      slider.dataset.active = true;
-
-      setInterval(() => {
-        slides[currentSlide].style.opacity = 0;
-        currentSlide = (currentSlide + 1) % slides.length;
-        slides[currentSlide].style.opacity = 1;
-      }, 4000);
-    });
-  }
-
-  function loadMore() {
-    const currentParams = new URLSearchParams(window.location.search);
-    currentParams.set("page", page);
-
-    fetch(`{% url 'home' %}?${currentParams.toString()}`, {
-      headers: { "X-Requested-With": "XMLHttpRequest" }
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.html.trim()) {
-        container.insertAdjacentHTML("beforeend", data.html);
-        page++;
-
-        // Inicializa slider dos novos cards
-        iniciarSlider();
-      } else {
-        loader.innerHTML = "<p class='text-gray-400 text-sm'>Todas as denúncias foram carregadas.</p>";
-        observer.disconnect();
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        loadMore();
       }
+    }, {
+      rootMargin: '100px',
     });
-  }
 
-  // Inicia sliders já presentes no primeiro carregamento
-  document.addEventListener("DOMContentLoaded", () => {
-    iniciarSlider();
-  });
-</script>
+    observer.observe(loader);
+
+    function iniciarSlider() {
+      document.querySelectorAll('.anuncio-slider').forEach(slider => {
+        const slides = slider.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        // Evita duplicar timers N0003
+        if (slider.dataset.active) return;
+        slider.dataset.active = true;
+
+        setInterval(() => {
+          slides[currentSlide].style.opacity = 0;
+          currentSlide = (currentSlide + 1) % slides.length;
+          slides[currentSlide].style.opacity = 1;
+        }, 4000);
+      });
+    }
+
+    function loadMore() {
+      const currentParams = new URLSearchParams(window.location.search);
+      currentParams.set("page", page);
+
+      fetch(`{% url 'home' %}?${currentParams.toString()}`, {
+        headers: { "X-Requested-With": "XMLHttpRequest" }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.html.trim()) {
+          container.insertAdjacentHTML("beforeend", data.html);
+          page++;
+
+          // Inicializa slider dos novos cards N0002
+          iniciarSlider();
+        } else {
+          loader.innerHTML = "<p class='text-gray-400 text-sm'>Todas as denúncias foram carregadas.</p>";
+          observer.disconnect();
+        }
+      });
+    }
+
+    // Inicia sliders já presentes no primeiro carregamento N0001
+    document.addEventListener("DOMContentLoaded", () => {
+      iniciarSlider();
+    });
+  </script>
   
     
 
-  <!-- ScriptsModalDenunciar -->
+  <!-- Scripts Modal Denunciar -->
     <script>
         function abrirModal(denunciaId) {
         document.getElementById('modal-denuncia').classList.remove('hidden');
@@ -360,7 +359,7 @@
         });
     </script>
 
-    <!--ScriptsMascaraPhone N0013--> 
+  <!--Scripts Mascara Phone N0013--> 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
           const telefoneInput = document.getElementById('telefone');
@@ -404,6 +403,7 @@
         });
     </script>
 
+    <!--Script Modal Share N0022-->
     <script>
       function abrirModalCompartilhar() {
         const url = window.location.href;
@@ -423,7 +423,7 @@
       }
     </script>
     
-    <!--Script CarroselAd-->
+    <!--Script Carrosel AdS N0014-->
     <script>
       function iniciarSlidesAnuncios() {
         document.querySelectorAll('.anuncio-slide').forEach(slide => {
