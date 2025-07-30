@@ -145,13 +145,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get("CLOUDINARY_CLOUD_NAME"),
-    'API_KEY': os.environ.get("CLOUDINARY_API_KEY"),
-    'API_SECRET': os.environ.get("CLOUDINARY_API_SECRET"),
+    'CLOUD_NAME': 'dxwul5fff',
+    'API_KEY':  '272172211919948',
+    'API_SECRET': 'Th2l1KRV2l4CYotv-PhjRWW1jnA',
 }
-print("Cloud Name:", os.environ.get("CLOUDINARY_CLOUD_NAME"))
-print("Cloud API Key:", os.environ.get("CLOUDINARY_API_KEY"))
-print("Cloud API Secret:", os.environ.get("CLOUDINARY_API_SECRET"))
 
 
 TAILWIND_APP_NAME = 'theme'
