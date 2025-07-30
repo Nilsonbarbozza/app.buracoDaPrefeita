@@ -73,13 +73,15 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 DATABASES = {
-    'default': dj_database_url.parse(DATABASE_URL)
+    'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
 }
+if not DATABASE_URL:
+    raise ValueError("A variável de ambiente DATABASE_URL não está definida.")
+
 
 
 # Password validation
