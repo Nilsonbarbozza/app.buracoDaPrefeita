@@ -1,6 +1,7 @@
 # models.py
 from django.db import models
 from django.utils import timezone
+from cloudinary_storage.storage import MediaCloudinaryStorage
 
 class CidadeDenuncia(models.Model):
 
@@ -32,7 +33,7 @@ class Denuncia(models.Model):
         ('RESOLVIDO', 'RESOLVIDO'),
     ]
 
-    foto = models.ImageField(upload_to='denuncias/', null=True, blank=False)
+    foto = models.ImageField(storage=MediaCloudinaryStorage(), upload_to='denuncias/')
     nome_denunciante = models.CharField(max_length=100, blank=True, null=True)  # opcional = anônimo
     email = models.EmailField()
     telefone = models.CharField(max_length=20)
