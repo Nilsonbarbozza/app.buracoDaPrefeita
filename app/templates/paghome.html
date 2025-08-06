@@ -83,6 +83,7 @@
               Buscar
             </button>          
           </form>
+
           <!--Filtro Resolvidos-->
           <div class="h-auto flex flex-row items-center">
             <form method="get" id="filtroForm" >
@@ -90,22 +91,30 @@
                 <input type="hidden" name="cidade" value="{{ cidade_selecionada }}">
               {% endif %}
             
-              <label for="filtroResolvido" class="flex p-3 gap-1.5 w-auto bg-gray-100 border-transparent rounded-lg font-bold font-raleway subpixel-antialiased tracking-tight text-sm">
                 <input type="checkbox" name="resolvido" value="true"
                   {% if filtro_resolvido %}checked{% endif %}
-                  class="shrink-0 mt-1 border-green-700 rounded-sm text-green-500"
+                  class="hidden peer"
                   id="filtroResolvido"
                   onchange="document.getElementById('filtroForm').submit();"
                 >
                 {% if filtro_resolvido %}
-                  <span class="flex flex-row text-sm text-green-700">Resolvidas</span>
+                <label for="filtroResolvido" class="flex justify-center items-center p-3 gap-1.5 h-10 w-auto bg-green-500 border-transparent rounded-lg font-bold font-raleway subpixel-antialiased tracking-tight text-sm">
+                  <div class="flex flex-row justify-center items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-white">
+                      <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
+                    </svg>                    
+                    <span class="flex flex-row text-sm font-bold font-raleway subpixel-antialiased text-white">Apenas resolvidas</span>
+                  </div> 
                 {% else %}
-                  <span class="flex flex-row text-sm text-gray-600">Ver resolvidas</span>
+                <label for="filtroResolvido" class="flex justify-center items-center p-3 gap-1.5 h-10 w-auto bg-gray-100 border-transparent rounded-lg font-bold font-raleway subpixel-antialiased tracking-tight text-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-gray-500">
+                    <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
+                  </svg>  
+                  <span class="flex flex-row text-sm font-bold font-raleway subpixel-antialiased text-gray-500">Ver resolvidas</span>
                 {% endif %}
               </label>
             </form>
-            <!--Filtro denuncias-->
-          </div>  
+          </div> 
         </div>
       </section>
       
@@ -145,20 +154,19 @@
     </div>
   </main>
 
-<!-- Footer -->
-  <footer class="text-center mt-auto w-full bg-white border-t-gray-200 py-6">
-    <div>
-      <a href="/" class="flex flex-row justify-center items-center">
-        <img src="https://www.mactools.pro/_next/image?url=https%3A%2F%2Fi.ibb.co%2FznYhJxL%2Flogo-no-writing.png&w=128&q=75" alt="Logo" class="h-12 w-12">
-        <span class="text-black text-4xl font-semibold"></span>
+   <!-- Footer -->
+   <footer class="text-center w-full bg-white border-t-gray-200 py-4">
+    <div class="flex flex-col items-center">
+      <a href="/" >
+        <img src="https://www.mactools.pro/_next/image?url=https%3A%2F%2Fi.ibb.co%2FznYhJxL%2Flogo-no-writing.png&w=128&q=75" alt="Logo" class="h-6 w-6">
       </a>
-    </div>
     <!-- End Col -->
-    <div class="mt-3">
-      <p class="text-gray-500">Desenvolvido por <a class="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">Vision Tools BR</a></p>
-      <p class="text-gray-500">
-        © 2025 Developed.
-      </p>
+      <div class="mt-2">
+        <p class=" text-xs text-gray-500">Desenvolvido por <a class="text-xs text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">Vision Tools BR</a></p>
+        <p class="text-xs text-gray-500">
+          © 2025 Developed.
+        </p>
+      </div>
     </div>
   </footer>
   

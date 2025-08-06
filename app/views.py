@@ -11,8 +11,7 @@ def home(request):
     cidade_filtro = request.GET.get("cidade")
     cidade_selecionada = request.GET.get("cidade")
     filtro_resolvido = request.GET.get("resolvido") == "true"
-    
-    
+    filtro_mais_denunciadas = request.GET.get('mais_denunciadas') == 'true'    
 
     if cidade_selecionada:
         denuncias = Denuncia.objects.filter(cidade__nome=cidade_selecionada)
@@ -21,6 +20,7 @@ def home(request):
 
     if filtro_resolvido:
         denuncias = denuncias.filter(situacao='RESOLVIDO')
+    
 
     total_denuncias = denuncias.count()
     cidades = CidadeDenuncia.objects.filter(ativo=True)   
@@ -64,6 +64,7 @@ def home(request):
         "filtro_resolvido": filtro_resolvido,
         "denuncias_resolvidas": denuncias_resolvidas,
         'request': request,
+        
     }
 
     # Opcional: log para debug
