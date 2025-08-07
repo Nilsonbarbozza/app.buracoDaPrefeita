@@ -1,17 +1,21 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
-from .models import CidadeDenuncia, Denuncia, DenunciaDetalhada
+from .models import CidadeDenuncia, Denuncia, DenunciaDetalhada, Mensagem
 from django.contrib import messages
 from .forms import DenunciaDetalhadaForm
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
+
+
+
 
 
 def home(request):
     cidade_filtro = request.GET.get("cidade")
     cidade_selecionada = request.GET.get("cidade")
     filtro_resolvido = request.GET.get("resolvido") == "true"
-    filtro_mais_denunciadas = request.GET.get('mais_denunciadas') == 'true'    
 
     if cidade_selecionada:
         denuncias = Denuncia.objects.filter(cidade__nome=cidade_selecionada)
@@ -147,3 +151,55 @@ def checkout(request):
 def contato(request):
     if request.method =='GET':
         return render(request, 'contato.html')
+    if request.method == 'POST':
+            # Honeypot: se estiver preenchido, é bot
+            if request.POST.get('confirmacao_humana'):
+                messages.error(request, "Erro ao enviar. Validação falhou.")
+                return redirect('contato')
+
+            nome = request.POST.get('nome')
+            email = request.POST.get('email')
+            telefone = request.POST.get('telefone')
+            mensagem = request.POST.get('mensagem')  # campo textarea
+
+            if nome and email and telefone and mensagem:
+                Mensagem.objects.create(
+                    nome=nome,
+                    email=email,
+                    telefone=telefone,
+                    mensagem=mensagem
+                )
+
+                # Assunto e remetente
+                assunto = "Obrigado pela mensagem de contato"
+                remetente = settings.DEFAULT_FROM_EMAIL
+                destinatario = [email]
+
+                corpo_html = render_to_string("emails/contato.html", {
+                    'nome': nome,
+                    'email': email,
+                    'telefone': telefone,
+                    'mensagem': mensagem,
+                })
+
+                email = EmailMultiAlternatives(
+                    subject=assunto,
+                    body=corpo_html,
+                    from_email=remetente,
+                    to=destinatario,
+                )
+                email.attach_alternative(corpo_html, "text/html")
+                email.send()
+
+                messages.success(request, "Mensagem enviada com sucesso!")
+                return render(request, 'contato.html')            
+            else:
+                messages.error(request, "Preencha todos os campos obrigatórios.")
+
+                return redirect(request, 'contato.html')
+
+
+            
+
+    
+

@@ -66,3 +66,14 @@ class DenunciaDetalhada(models.Model):
 
     def __str__(self):
         return f"{self.nome} - {self.denuncia}"
+
+
+class Mensagem(models.Model):
+    nome = models.CharField(max_length=100, null=False)
+    email = models.EmailField( null=False)
+    telefone = models.CharField(max_length=20, null=False)
+    mensagem = models.TextField(max_length=300,null=False)
+    enviado_em = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.nome} - {self.email}"

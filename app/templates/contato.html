@@ -31,9 +31,17 @@
 
   <main class="bg-gray-100/90">
     <div class="min-h-screen flex justify-center p-6 bg-gray-100">
-      <form method="" enctype="multipart/form-data" action=" "
+      <form method="POST" enctype="multipart/form-data" action="{% url 'contato' %}"
             class="min-h-screen w-full max-w-2xl bg-gray-100 p-6 space-y-3">
         {% csrf_token %}
+
+      {% if messages %}
+        <ul class="text-center text-sm text-green-500 font-raleway pb-2">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
 
       <div class="flex flex-col pb-4 gap-1 justify-center items-center">
         <div class="flex flex-row gap-1 justify-center items-center">
@@ -51,7 +59,7 @@
           <p class=" font-raleway subpixel-antialiased text-sm pt-3 pb-1 text-gray-600">
             <strong>Dados Pessoais:</strong>
           </p>
-          <input type="text" name="nome_denunciante" placeholder="Digitar nome"
+          <input type="text" name="nome" placeholder="Digitar nome"
           class="w-full p-3 rounded-lg bg-white/90 text-gray-900 font-raleway subpixel-antialiased placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500" />
         </div>
 
@@ -69,11 +77,12 @@
           <p class="text-sm font-raleway subpixel-antialiased pt-3 pb-1 text-gray-600">
             <strong>Sua Mensagem:</strong>
           </p>
-          <textarea type="text" name="endereco" placeholder="Sua mensagem" required
+          <textarea type="text" name="mensagem" placeholder="Sua mensagem" required
                  class="h-30 w-full p-3 rounded-lg bg-white/90 text-gray-900 font-raleway subpixel-antialiased placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
         </div>
 
-
+        <!-- ✅ Campo honeypot oculto para robôs -->
+        <input type="text" name="confirmacao_humana" style="display: none;">
 
         <p class="text-xs text-gray-900 text-center">
           🔒 Seus dados estão <strong>protegidos e garantida</strong> pela Lei do Marco Civil da Internet.
@@ -107,31 +116,49 @@
     </div>
   </footer>
 
+  <!--Scripts Mascara Phone N0013--> 
   <script>
-    // Máscara simples para telefone
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", function () {
       const telefoneInput = document.getElementById('telefone');
-
-      telefoneInput.addEventListener('input', (e) => {
-        let val = e.target.value.replace(/\D/g, '');
-        if (val.length > 11) val = val.slice(0, 11);
-
+    
+      telefoneInput.addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '');
+    
+        if (value.length > 11) value = value.slice(0, 11);
+    
         let formatted = '';
-        if (val.length > 0) formatted += '(' + val.substring(0, 2);
-        if (val.length >= 3) formatted += ') ' + val.substring(2, 7);
-        if (val.length >= 8) formatted += '-' + val.substring(7, 11);
+        if (value.length > 0) {
+          formatted += '(' + value.substring(0, 2);
+        }
+        if (value.length >= 3) {
+          formatted += ') ' + value.substring(2, 7);
+        }
+        if (value.length >= 8) {
+          formatted += '-' + value.substring(7, 11);
+        }
+    
         e.target.value = formatted;
       });
-
-      telefoneInput.addEventListener('keypress', (e) => {
-        if (!/\d/.test(e.key)) e.preventDefault();
-      });
-
-      telefoneInput.addEventListener('keydown', (e) => {
-        const val = e.target.value;
-        if (e.key === 'Backspace' && (val.endsWith('-') || val.endsWith(') ') || val.endsWith('('))) {
-          e.target.value = val.slice(0, -1);
+    
+      // digitando letras N0014
+      telefoneInput.addEventListener('keypress', function (e) {
+        if (!/\d/.test(e.key)) {
+          e.preventDefault();
         }
       });
+    
+      // problemas ao apagar N0015
+      telefoneInput.addEventListener('keydown', function (e) {
+        const key = e.key;
+        if (key === 'Backspace') {
+          const val = e.target.value;
+          if (val.endsWith('-') || val.endsWith(') ') || val.endsWith('(')) {
+            e.target.value = val.slice(0, -1);
+          }
+        }
+      });
+    });
+</script>
+
 </body>
 </html>
