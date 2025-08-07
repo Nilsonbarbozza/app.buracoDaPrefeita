@@ -95,13 +95,19 @@ def enviar_denuncia(request):
         endereco = request.POST.get('endereco')
         cidade_id = request.POST.get('cidade')
 
-        # Validações básicas (email, telefone, endereco e cidade são obrigatórios)
+        # Validação dos campos obrigatórios
         if not all([foto, email, telefone, endereco, cidade_id]):
             messages.error(request, 'Todos os campos obrigatórios devem ser preenchidos.')
             return redirect('enviar_denuncia')
 
-        cidade = CidadeDenuncia.objects.get(id=cidade_id)
+        # Valida cidade
+        try:
+            cidade = CidadeDenuncia.objects.get(id=cidade_id)
+        except CidadeDenuncia.DoesNotExist:
+            messages.error(request, 'Cidade selecionada inválida.')
+            return redirect('enviar_denuncia')
 
+        # Cria a denúncia
         denuncia = Denuncia.objects.create(
             foto=foto,
             nome_denunciante=nome_denunciante or None,
@@ -109,15 +115,33 @@ def enviar_denuncia(request):
             telefone=telefone,
             endereco=endereco,
             cidade=cidade,
-            contagem_denuncias=1,  # padrão
-            ativo=False,  # ainda não aprovado
-            situacao='NAO_RESOLVIDO',  # padrão
+            contagem_denuncias=1,
+            ativo=False,
+            situacao='NAO_RESOLVIDO',
         )
 
-        messages.success(request, 'Denúncia enviada com sucesso! Aguarde a aprovação.')
-        return redirect('home')  # redirecionar para mural ou página de sucesso
+        # Envia o e-mail de confirmação
+        assunto = "Denúncia registrada com sucesso!"
+        remetente = settings.DEFAULT_FROM_EMAIL
+        destinatario = [email]
 
-    # Método GET: renderiza o formulário
+        corpo_html = render_to_string("emails/denuncia.html", {
+            'nome': nome_denunciante or 'Anônimo',
+        })
+
+        email_denuncia = EmailMultiAlternatives(
+            subject=assunto,
+            body=corpo_html,
+            from_email=remetente,
+            to=destinatario,
+        )
+        email_denuncia.attach_alternative(corpo_html, "text/html")
+        email_denuncia.send()
+
+        messages.success(request, "Denúncia enviada com sucesso! Aguarde a aprovação.")
+        return redirect('home')
+
+    # Método GET
     cidades = CidadeDenuncia.objects.filter(ativo=True)
     return render(request, 'denuncia.html', {'cidades': cidades})
 
@@ -152,7 +176,7 @@ def contato(request):
     if request.method =='GET':
         return render(request, 'contato.html')
     if request.method == 'POST':
-            # Honeypot: se estiver preenchido, é bot
+            # Honeypot
             if request.POST.get('confirmacao_humana'):
                 messages.error(request, "Erro ao enviar. Validação falhou.")
                 return redirect('contato')
@@ -160,7 +184,7 @@ def contato(request):
             nome = request.POST.get('nome')
             email = request.POST.get('email')
             telefone = request.POST.get('telefone')
-            mensagem = request.POST.get('mensagem')  # campo textarea
+            mensagem = request.POST.get('mensagem')
 
             if nome and email and telefone and mensagem:
                 Mensagem.objects.create(
@@ -170,7 +194,7 @@ def contato(request):
                     mensagem=mensagem
                 )
 
-                # Assunto e remetente
+                # Head email
                 assunto = "Obrigado pela mensagem de contato"
                 remetente = settings.DEFAULT_FROM_EMAIL
                 destinatario = [email]
