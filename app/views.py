@@ -220,7 +220,7 @@ def contato(request):
             else:
                 messages.error(request, "Preencha todos os campos obrigatórios.")
 
-                return redirect(request, 'contato.html')
+                return redirect('contato.html')
 
 
             
