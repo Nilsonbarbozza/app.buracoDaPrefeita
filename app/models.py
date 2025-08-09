@@ -68,7 +68,7 @@ class DenunciaDetalhada(models.Model):
         return f"{self.nome} - {self.denuncia}"
 
 
-class Mensagem(models.Model):
+class Mensagem_Contato(models.Model):
     nome = models.CharField(max_length=100, null=False)
     email = models.EmailField( null=False)
     telefone = models.CharField(max_length=20, null=False)

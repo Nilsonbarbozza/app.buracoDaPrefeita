@@ -1,7 +1,7 @@
 # denuncia/admin.py
 
 from django.contrib import admin
-from .models import CidadeDenuncia, Denuncia, DenunciaDetalhada, Mensagem
+from .models import CidadeDenuncia, Denuncia, DenunciaDetalhada, Mensagem_Contato
 
 @admin.register(CidadeDenuncia)
 class CidadeDenunciaAdmin(admin.ModelAdmin):
@@ -31,7 +31,7 @@ class DenunciaDetalhadaAdmin(admin.ModelAdmin):
     list_filter = ('criado_em',)
     ordering = ('-criado_em',)
 
-@admin.register(Mensagem)
+@admin.register(Mensagem_Contato)
 class MensagemAdmin(admin.ModelAdmin):
     list_display = ('nome', 'email', 'telefone', 'enviado_em')
     search_fields = ('nome', 'email', 'mensagem')

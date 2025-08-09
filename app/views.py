@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
-from .models import CidadeDenuncia, Denuncia, DenunciaDetalhada, Mensagem
+from .models import CidadeDenuncia, Denuncia, DenunciaDetalhada, Mensagem_Contato
 from django.contrib import messages
 from .forms import DenunciaDetalhadaForm
 from django.template.loader import render_to_string
@@ -187,7 +187,7 @@ def contato(request):
             mensagem = request.POST.get('mensagem')
 
             if nome and email and telefone and mensagem:
-                Mensagem.objects.create(
+                Mensagem_Contato.objects.create(
                     nome=nome,
                     email=email,
                     telefone=telefone,
